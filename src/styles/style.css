@@ -1,0 +1,1273 @@
+@charset "utf-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*, .box_sizing_border_box, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background-color: #f9d686;
+}
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+* {
+	box-sizing: border-box;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-decoration: none
+}
+*:focus {
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+body {
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 0;
+	padding: 0;
+	background: none;
+}
+body, html {
+	padding: 0;
+	margin: 0;
+	background: #fff;
+	font-family: "Montserrat", sans-serif;
+}
+ul {
+	list-style: none;
+	margin: 0
+}
+a {
+	transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+}
+.wrapper {
+	margin: 0 auto;
+	width: 1920px;
+	transform-origin: top left;
+	position: absolute;
+	overflow: hidden;
+	max-width: 1920px;
+}
+.container {
+	display: block;
+	margin: 0 auto;
+	width: 1200px;
+	position: relative;
+	max-width: 1200px;
+}
+.frame {
+	display: block;
+	margin: 0 auto;
+	width: 776px;
+	position: relative;
+	max-width: 776px;
+}
+.fs-10 {
+	font-size: 10px;
+}
+@media (max-width: 992px) {
+	.wrapper {
+		margin: 0 auto;
+		width: 992px;
+		transform-origin: top left;
+		position: absolute;
+		overflow: hidden;
+		max-width: 992px;
+	}
+	.container {
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+		max-width: 100%;
+	}
+	.fs-10 {
+		font-size: 20px;
+	}
+}
+.opacity-5 {
+	opacity: 0.5;
+}
+.zoom {
+	transition: transform .2s;
+	-webkit-transition: transform .2s;
+	/* Animation */
+}
+.zoom:hover {
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transform-origin: center;
+	/* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.zoom-50 {
+	transition: transform .3s;
+	-webkit-transition: transform .3s;
+	/* Animation */
+}
+.zoom-50:hover {
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	transform-origin: center;
+	/* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.brightness:hover {
+	filter: brightness(1.2)
+}
+.pointer-events-none {
+	pointer-events: none;
+}
+/*----------------------------Trang chu---------------------------------*/
+.navbar {
+	height: 75px;
+}
+.navbar .navbar-brand {
+	max-width: 180px;
+}
+.navbar .nav-item {
+	padding: 0 12px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	animation: fadedown .6s ease-in-out;
+}
+.navbar .nav-item .nav-link {
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+}
+.navbar .nav-item.btn-login .nav-link {
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #476FF3;
+	border-radius: 24px;
+	padding: 8px 24px;
+}
+.navbar .nav-item.btn-login .nav-link:hover {
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #7392FB;
+	border-radius: 24px;
+	padding: 8px 24px;
+}
+.navbar .nav-item .nav-link:hover {
+	font-size: 13px;
+	font-weight: bold;
+	color: #476FF3;
+}
+.main-banner {
+	background-image: url(../images/banner-bg.png);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 137px 0px 280px 0;
+	position: relative;
+	z-index: 11;
+}
+.main-banner .bg-left, .main-banner .bg-right {
+	top: 0;
+	left: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.main-banner .text-des {
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 36px;
+	padding: 36px 28px;
+}
+.main-banner .btn-xemthem {
+	font-size: 20px;
+	font-weight: bold;
+	color: #3F65E0;
+	background-color: #fff;
+	border-radius: 40px;
+	padding: 27px 88px;
+	text-align: center;
+	text-decoration: none;
+}
+.features {
+	background-color: #EEF1F4;
+	position: relative;
+	padding-bottom: 200px;
+}
+.features .row {
+	margin-top: -100px;
+	width: 100%;
+	position: relative;
+	z-index: 20;
+}
+.features .row .item {
+	background-color: #fff;
+	border-radius: 18px;
+	padding: 8px 24px 48px 24px;
+	font-size: 13px;
+	color: #515151;
+}
+.features .row .item:hover {
+	box-shadow: 0 4px 8px 2px #c9c7c2;
+	transform: scale(1.02);
+	transform-origin: center;
+	transition: .3s ease-in-out;
+}
+.features .item h4 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #1D3EAD;
+	text-transform: uppercase;
+	line-height: 34px;
+	min-height: 68px;
+	overflow: hidden;
+}
+.features .item .btn-xemthem {
+	font-size: 13px;
+	color: #fff;
+	background-color: #1D3EAD;
+	padding: 16px 24px;
+	text-decoration: none;
+	border-radius: 24px;
+	opacity: .8;
+}
+.features .item .btn-xemthem:hover, .features .item .btn-xemthem:active, .features .item .btn-xemthem:focus {
+	opacity: 1;
+}
+.features .item .description {
+	padding: 16px 0;
+	color: #515151;
+	min-height: 110px;
+	overflow: hidden;
+}
+.cta {
+	margin-top: -100px;
+	padding-bottom: 300px;
+	position: relative;
+}
+.cta .game {
+	background-image: url("../images/bg-cta-game.png");
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 3px 0px;
+	position: relative;
+	z-index: 11;
+	margin-bottom: 24px;
+	color: #fff;
+}
+.cta .game:hover {
+	filter: drop-shadow(0 8px 8px #c9c7c2);
+	transform: scale(1.02);
+	transform-origin: center;
+	transition: .3s ease-in-out;
+}
+.cta .quest {
+	background-image: url("../images/bg-cta-quest.png");
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 12px 0px;
+	position: relative;
+	z-index: 11;
+	color: #fff;
+}
+.cta .quest:hover {
+	filter: drop-shadow(0 8px 8px #c9c7c2);
+	transform: scale(1.02);
+	transform-origin: center;
+	transition: .3s ease-in-out;
+}
+.cta .game h4, .cta .quest h4 {
+	font-size: 24px;
+	font-weight: bold;
+}
+.cta .game .description, .cta .quest .description {
+	padding: 16px 0;
+	font-size: 13px;
+	font-weight: bold;
+}
+.cta .game .btn-xemthem, .cta .quest .btn-xemthem {
+	font-size: 16px;
+	color: #1D3EAD;
+	background-color: #fff;
+	padding: 16px 24px;
+	text-decoration: none;
+	border-radius: 24px;
+	font-weight: bold;
+}
+.cta .game .btn-xemthem:hover, .cta .quest .btn-xemthem:hover {
+	color: #fff;
+	background-color: #8CA4F5;
+}
+.cta .bg-cta-left {
+	position: absolute;
+	left: 126px;
+	bottom: 110px;
+	z-index: 40;
+}
+.cta .bg-cta-right {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 41;
+}
+.bg-home-right {
+	position: absolute;
+	top: 300px;
+	right: 60px;
+	z-index: 8;
+}
+@media (max-width: 992px) {
+	.main-banner {
+		background-image: url("../images/banner-bg-m.png");
+	}
+	.main-banner .bg-left, .main-banner .bg-right { 
+		display: none;
+	}
+	.navbar {
+		height: 120px;
+	}
+	.navbar .navbar-brand {
+		max-width: 280px;
+	}
+	.navbar-toggler {
+		font-size: 32px;
+	}
+	.navbar .nav-item {
+		font-size: 24px;
+	}
+	.navbar .nav-item .nav-link {
+		font-size: 24px;
+		padding: 16px;
+		border-bottom: solid 1px #ccc;
+	}
+	.navbar .nav-item .nav-link:hover {
+		font-size: 24px;
+		font-weight: bold;
+		color: #476FF3;
+	}
+	.navbar-collapse {
+		z-index: 9999;
+		background-color: rgb(33 37 41);
+		width: 100%;
+		padding-top: 32px;
+	}
+	.navbar-collapse .btn-login {
+		max-width: 260px;
+		font-size: 24px;
+	}
+	.navbar .nav-item.btn-login .nav-link {
+		font-size: 24px;
+		margin: 16px;
+		padding: 16px;
+	}
+	.navbar .nav-item.btn-login .nav-link:hover {
+		font-size: 24px;
+		margin: 16px;
+		padding: 16px;
+	}
+	.main-banner .text-des {
+		font-size: 28px;
+		font-weight: bold;
+		color: #fff;
+		line-height: 36px;
+		padding: 36px 28px;
+	}
+	.main-banner .btn-xemthem {
+		font-size: 28px;
+		font-weight: bold;
+		color: #3F65E0;
+		background-color: #fff;
+		border-radius: 16px;
+		padding: 16px 60px;
+		text-align: center;
+		text-decoration: none;
+	}
+	.features .row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.features .row > * {
+		margin: 16px 0;
+		text-align: center;
+	}
+	.features .item h4 {
+		font-size: 32px;
+	}
+	.features .item .description {
+		font-size: 28px;
+	}
+	.features .item .btn-xemthem {
+		font-size: 24px;
+	}
+	.cta .row > * {
+		margin: 16px 0;
+		text-align: center !important;
+	}
+	.cta .col-lg-6 .text-start, .cta .col-lg-6 .text-end {
+		text-align: center !important;
+		margin-bottom: 16px;
+	}
+	.cta .game h4, .cta .quest h4 {
+		font-size: 32px;
+		font-weight: bold;
+	}
+	.cta .game .description, .cta .quest .description {
+		padding: 16px;
+		font-size: 24px;
+	}
+	.cta .game .btn-xemthem, .cta .quest .btn-xemthem {
+		font-size: 24px;
+		color: #1D3EAD;
+		background-color: #fff;
+		padding: 16px 24px;
+		text-decoration: none;
+		border-radius: 24px;
+		font-weight: bold;
+	}
+	.bg-cta-left, .bg-cta-right {
+		display: none;
+	}
+	.cta {
+		padding-bottom: 100px;
+	}
+}
+/*----------------------------Danh sach game---------------------------------*/
+.bg-distribute {
+	background-color: #EEF1F4;
+	overflow: auto;
+}
+.distribute-banner {
+	background-image: url("../images/bg-banner-distribute.png");
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 39px 0px;
+	position: relative;
+	z-index: 11;
+	color: #fff;
+	margin: 48px;
+	border-radius: 26px;
+}
+.distribute-banner h2 {
+	font-size: 46px;
+	font-weight: bold;
+	padding: 32px 0;
+}
+.distribute-banner .step {
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+.distribute-banner .step .btn-step a {
+	font-size: 20px;
+	color: #fff;
+	font-weight: bold;
+	background-color: #1B3795;
+	border-radius: 16px;
+	padding: 8px 36px;
+	text-decoration: none;
+}
+.distribute-banner .step .description-step {
+	margin: 24px 0;
+}
+.distribute-banner .step.step-01 .description-step {
+	padding: 0;
+}
+.distribute-banner .step.step-02 .description-step {
+	padding: 0 24px;
+}
+.distribute-banner .step.step-03 .description-step {
+	padding: 0;
+}
+.distribute-banner .note {
+	text-align: center;
+	font-size: 13px;
+	padding-top: 16px;
+}
+.games .title {
+	font-size: 65px;
+	color: #353232;
+	font-weight: bold;
+}
+.games .sub-title {
+	font-size: 16px;
+	color: #505050;
+	font-weight: 500;
+	padding-left: 48px;
+}
+.list-games {
+	margin-bottom: 50px;
+	height: 700px;
+	overflow: hidden;
+}
+.list-games .game .title-game {
+	text-align: left;
+}
+.list-games .game .title-game h2 a {
+	font-size: 38px;
+	color: #353232;
+	font-weight: bold;
+	text-decoration: none;
+}
+.list-games .game .icon-game {
+	padding-right: 8px;
+}
+.list-games .game .title-game .tag a {
+	font-size: 16px;
+	color: #515151;
+	font-weight: 500;
+	text-decoration: none;
+}
+.list-games .compatible-os {
+	text-align: left;
+	padding: 16px 0 50px 0;
+}
+.list-games .compatible-os a {
+	font-size: 16px;
+	color: #353232;
+	font-weight: 500;
+	text-decoration: none;
+	padding: 8px 16px;
+	border: solid 1px #353232;
+	margin: 0 4px;
+}
+.list-games .compatible-os a:hover {
+	font-size: 16px;
+	color: #fff;
+	font-weight: 500;
+	text-decoration: none;
+	padding: 8px 16px;
+	border: solid 1px #476FF3;
+	background-color: #476FF3;
+}
+.list-games .slick-dots {
+	margin-bottom: -60px;
+}
+.list-games .slick-dots li {
+	font-size: 20px;
+	font-weight: 500;
+	color: #DBDBDB;
+	border: solid 1px #DBDBDB;
+	border-radius: 8px;
+	padding: 10px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	margin-top: 50px;
+}
+.list-games .slick-dots li.slick-active {
+	font-size: 20px;
+	font-weight: 500;
+	color: #fff;
+	border: solid 1px #000000;
+	border-radius: 8px;
+	padding: 10px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	background-color: #000;
+}
+@media (max-width: 992px) {
+	.distribute-banner h2 {
+		text-align: center;
+	}
+	.distribute-banner .step .btn-step a {
+		font-size: 24px;
+	}
+	.distribute-banner .step {
+		font-size: 24px;
+		padding: 0 24px;
+	}
+	.distribute-banner .note {
+		font-size: 20px;
+	}
+	.games .sub-title {
+		font-size: 26px;
+	}
+	.games .title {
+		padding-left: 16px;
+	}
+	.list-games .game .title-game .tag a {
+		font-size: 24px;
+	}
+	.list-games .compatible-os a {
+		font-size: 24px;
+	}
+	.list-games .compatible-os a:hover {
+		font-size: 24px;
+	}
+	.list-games {
+		transform: scale(1.43);
+		transform-origin: top center;
+		height: 1050px
+	}
+}
+/*----------------------------Affiliater---------------------------------*/
+.bg-affiliater {
+	background-color: #EEF1F4;
+	overflow: auto;
+}
+.affiliater-banner {
+	background-image: url("../images/bg-banner-distribute.png");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 216px 0px;
+	position: relative;
+	z-index: 11;
+	color: #fff;
+	margin: 48px
+}
+.form-register {
+	margin-top: -400px;
+	position: relative;
+	z-index: 40;
+	text-align: center;
+	border-bottom: solid 1px #DBDBDB;
+}
+.form-register h4 {
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+}
+.form-register h2 {
+	font-size: 46px;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	padding-bottom: 48px;
+}
+.form-register .card .card-body h4 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #353232;
+	text-align: right;
+}
+.form-register .btn-xacthuc {
+	margin: 24px 0;
+}
+.form-register .btn-xacthuc a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+	text-align: center;
+	background-color: #D9D9D9;
+	padding: 12px 32px;
+	border-radius: 8px;
+	text-decoration: none;
+	border: solid 1px #D9D9D9;
+}
+.form-register .btn-xacthuc a:hover {
+	color: #1D3EAD;
+}
+.form-register .btn-xacthuc a:active, .form-register .btn-xacthuc a:focus {
+	color: #1D3EAD;
+	background-color: #D9D9D9;
+}
+.form-register .form-check-label {
+	font-size: 10px;
+}
+.form-register .form-check-label a {
+	font-size: 10px;
+	color: #000;
+	text-decoration: none;
+}
+.form-register .form-check-label a:hover {
+	font-size: 10px;
+	color: #1D3EAD;
+	text-decoration: none;
+}
+.form-register .btn-primary-xl {
+	background-color: #1D3EAD;
+	color: #fff;
+}
+.form-register .btn-primary-xl:hover, .form-register .btn-primary-xl:active, .form-register .btn-primary-xl:focus {
+	background-color: #3252BD;
+	color: #fff;
+}
+.form-register .frame {
+	padding-bottom: 100px;
+}
+@media (max-width: 992px) {
+	.form-register {
+		font-size: 20px;
+	}
+	.form-register h4 {
+		font-size: 24px;
+	}
+	.form-register .card .card-body h4 {
+		font-size: 22px;
+		text-align: left;
+	}
+	.form-register .form-select {
+		font-size: 24px;
+	}
+	.form-register .form-select option {
+		font-size: 13px;
+	}
+	.form-register .form-control {
+		font-size: 24px;
+	}
+	.form-register .btn-xacthuc a {
+		font-size: 20px;
+	}
+	.form-register .form-check-label, .form-register .form-check-label a {
+		font-size: 18px;
+	}
+	.form-register .btn {
+		font-size: 28px;
+		padding: 16px 24px;
+	}
+}
+/*----------------------------Quest---------------------------------*/
+.quest .title {
+	font-size: 65px;
+	color: #353232;
+	font-weight: bold;
+}
+.quest .form-select option {
+	font-size: 13px;
+}
+.list-quest .title-game {
+	font-size: 38px;
+	font-weight: bold;
+	color: #353232;
+	padding: 16px 0 0 0;
+}
+.list-quest .date {
+	color: #515151;
+	font-size: 20px;
+}
+.list-quest .btn-point {
+	margin: 16px 0;
+}
+.list-quest .btn-point a {
+	display: block;
+	padding: 8px 0;
+	color: #fff;
+	background-color: #476FF3;
+	border-radius: 24px;
+	font-size: 20px;
+	margin-right: 55px;
+}
+.list-quest .btn-point a:hover, .list-quest .btn-point a:active, .list-quest .btn-point a:focus {
+	background-color: #3252BD;
+	color: #fff;
+}
+.statistical {
+	background-color: #EEF1F4;
+	padding: 48px;
+	position: relative;
+	border-bottom: solid 1px #DBDBDB;
+}
+.statistical .title {
+	font-size: 25px;
+	font-weight: bold;
+	color: #353232;
+	padding: 16px 0;
+}
+.statistical .row .table tr td {
+	padding: 16px 8px;
+}
+.statistical .bg-statistical-right {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 41;
+}
+@media (max-width: 992px) {
+	.quest .form-select {
+		font-size: 28px;
+	}
+	.list-quest .row > * {
+		text-align: center;
+	}
+	.list-quest .row .col-lg-6{
+		transform: scale(1.5);
+		transform-origin: top center;
+		min-height: 785px;
+	}
+	.list-quest .btn-point a {
+		max-width: 560px;
+		margin: 0 auto;
+		font-size: 24px;
+	}
+	.list-quest .date {
+		font-size: 24px;
+	}
+	.statistical .title {
+		font-size: 32px;
+	}
+	.statistical .row > * {
+		font-size: 24px;
+		text-align: center;
+	}
+	.statistical .bg-statistical-right {
+		display: none;
+	}
+}
+/*----------------------------Profile---------------------------------*/
+.bg-profile {
+	background-color: #EEF1F4;
+	overflow: auto;
+}
+.profile-banner {
+	background-image: url("../images/bg-banner-distribute.png");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 216px 0px;
+	position: relative;
+	z-index: 11;
+	color: #fff;
+	margin: 48px
+}
+.profile-content {
+	margin-top: -450px;
+	position: relative;
+	z-index: 40;
+	text-align: center;
+	border-bottom: solid 1px #DBDBDB;
+}
+.profile-content h4 a {
+	font-size: 38px;
+	font-weight: bold;
+	color: #1D3EAD;
+	text-decoration: none;
+}
+.profile-content h4 a.active {
+	font-size: 38px;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+}
+.profile-content .account .info .name {
+	font-size: 20px;
+	font-weight: bold;
+	color: #1D3EAD;
+}
+.profile-content .account .info .mail {
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+.profile-content .account {
+	padding: 48px 24px;
+}
+.profile-content .account .copy {
+	font-size: 16px;
+	font-weight: 500;
+}
+.profile-content .account .btn-edit {
+	background-color: #D9D9D9;
+	border-radius: 8px;
+	font-size: 13px;
+	padding: 8px 24px;
+	color: #000;
+	text-decoration: none;
+	margin-right: 8px;
+}
+.profile-content .account h2, .profile-content .game-info h2 {
+	font-size: 25px;
+	font-weight: bold;
+	color: #353232;
+}
+.profile-content .game-info {
+	padding: 40px 24px;
+}
+.profile-content .game-info .form-select option {
+	font-size: 13px;
+}
+.profile-content .game-info .server {
+	font-size: 20px;
+	font-weight: bold;
+	color: #1D3EAD;
+}
+.profile-content .game-info .total {
+	background-color: #476FF3;
+	padding: 24px 0;
+	border-radius: 16px;
+	color: #fff;
+	margin-top: 16px;
+}
+.profile-content .game-info .total .title-total {
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+}
+.profile-content .game-info .total .number-total {
+	color: #fff;
+	font-size: 38px;
+	font-weight: bold;
+}
+.statistical-account {
+	padding: 24px 16px;
+	position: relative;
+	border-bottom: solid 1px #DBDBDB;
+}
+.statistical-account .title {
+	font-size: 25px;
+	font-weight: bold;
+	color: #353232;
+	text-align: left;
+	padding-bottom: 16px;
+}
+.statistical-account .btn-filter .btn {
+	border: solid 1px #ccc;
+	margin: 0 8px;
+	font-size: 13px;
+	color: #353232;
+}
+.statistical-account .btn-filter .btn.active, .statistical-account .btn-filter .btn:hover, .statistical-account .btn-filter .btn:focus {
+	border: solid 1px #ccc;
+	background-color: #E9E9E9;
+}
+.statistical-account .btn-check-xl a {
+	background-color: #1D3EAD;
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	padding: 16px 48px;
+	text-decoration: none;
+	border-radius: 8px;
+	border: solid 1px #1D3EAD;
+}
+.statistical-account .btn-check-xl a:hover, .statistical-account .btn-check-xl a:active, .statistical-account .btn-check-xl a:focus {
+	border: none;
+	background-color: #2E4FBF;
+}
+.statistical-account .total-install {
+	background-color: #EFEFEF;
+}
+.statistical-account .total-install .total {
+	background-color: #476FF3;
+	padding: 48px 0;
+	border-radius: 16px;
+	color: #fff;
+	margin: 16px 0;
+}
+.statistical-account .total-install .total .title-total {
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+}
+.statistical-account .total-install .total .number-total {
+	color: #fff;
+	font-size: 38px;
+	font-weight: bold;
+}
+.nav-reports {
+	padding-top: 16px;
+}
+.nav-reports .card-link {
+	font-size: 20px;
+	font-weight: 500;
+	color: #BDBDBD;
+	text-decoration: none;
+	padding: 0 16px;
+}
+.nav-reports .card-link.active, .nav-reports .card-link:hover, .nav-reports .card-link:active, .nav-reports .card-link:focus {
+	font-size: 20px;
+	font-weight: bold;
+	color: #2A53A2;
+	text-decoration: none;
+	padding: 0 16px;
+}
+.statistical-account .tbl-reports {
+	font-size: 13px;
+}
+.statistical-account .tbl-reports .total h5 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #1D3EAD;
+}
+.pag .page-item .page-link {
+	font-size: 20px;
+	font-weight: 500;
+	color: #DBDBDB;
+	border: solid 1px #DBDBDB;
+	border-radius: 8px;
+	padding: 8px 20px;
+	text-align: center;
+	margin: 16px 8px;
+}
+.pag .page-item .page-link.active {
+	font-size: 20px;
+	font-weight: 500;
+	color: #fff;
+	border: solid 1px #000000;
+	border-radius: 8px;
+	padding: 8px 20px;
+	text-align: center;
+	margin: 16px 8px;
+	background-color: #000;
+}
+.form-control, .form-select {
+	border: solid 1px #DBDBDB;
+}
+@media (max-width: 992px) {
+	.profile-banner {
+		margin: 0;
+	}
+	.profile-content {
+		margin-top: -400px;
+	}
+	.profile-content .account h2, .profile-content .game-info h2 {
+		font-size: 32px;
+	}
+	.profile-content .account .info .name, .profile-content .account .info .mail {
+		font-size: 24px;
+	}
+	.profile-content .account {
+		font-size: 24px;
+	}
+	.profile-content .account .copy {
+		font-size: 24px;
+	}
+	.profile-content .account .copy img {
+		width: 24px
+	}
+	.profile-content .account .btn-edit {
+		font-size: 24px;
+	}
+	.game-info .col-lg-3.text-end {
+		text-align: left !important;
+	}
+	.game-info .row > * {
+		font-size: 24px;
+	}
+	.game-info .form-select {
+		font-size: 24px;
+	}
+	.game-info .form-select option {
+		font-size: 13px;
+	}
+	.profile-content .game-info .server {
+		font-size: 24px;
+	}
+	.profile-content .game-info .total .title-total, .statistical-account .total-install .total .title-total {
+		font-size: 28px;
+	}
+	.profile-content .game-info .total .number-total, .statistical-account .total-install .total .number-total {
+		font-size: 48px;
+	}
+	.statistical-account .title {
+		font-size: 32px;
+	}
+	.statistical-account .btn-filter .btn {
+		font-size: 24px;
+		margin: 8px;
+	}
+	.statistical-account .btn-check-xl a {
+		font-size: 22px;
+		padding: 16px;
+		text-wrap: nowrap;
+	}
+	.nav-reports .card-link {
+		font-size: 22px;
+		padding: 0 8px
+	}
+	.nav-reports .card-link.active, .nav-reports .card-link:hover, .nav-reports .card-link:active, .nav-reports .card-link:focus {
+		font-size: 22px;
+	}
+	.profile-content h6 {
+		font-size: 24px;
+	}
+	.profile-content .form-select {
+		font-size: 24px;
+	}
+	.profile-content .form-select option {
+		font-size: 13px;
+	}
+	.statistical-account .tbl-reports {
+		font-size: 22px;
+	}
+}
+/*----------------------------Footer---------------------------------*/
+.footer {
+	background-color: #EFEFEF;
+	padding: 48px 0;
+}
+.footer .copyright {
+	font-size: 13px;
+	color: #515151;
+	padding-top: 8px
+}
+.footer .line-f {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.footer .nav-item .nav-link {
+	font-size: 13px;
+	color: #505050;
+}
+.footer .nav-item .nav-link:hover {
+	font-size: 13px;
+	color: #8CA4F5;
+}
+.footer .info {
+	font-size: 13px;
+}
+.footer .social {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+@media (max-width: 992px) {
+	.footer .logo.text-end, .footer .copyright.text-end {
+		text-align: center !important;
+		font-size: 22px;
+	}
+	.footer .nav-item .nav-link {
+		font-size: 20px;
+		color: #505050;
+		padding: 4px;
+	}
+	.footer .info {
+		font-size: 24px;
+		text-align: center;
+	}
+	.footer .social {
+		transform: scale(2);
+		transform-origin: top right;
+	}
+}
+/*----------------------------Modal---------------------------------*/
+.btn-nav-modal {
+	background-color: #466CE9;
+	border-radius: 36px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #fff;
+	padding: 8px 24px;
+}
+.title-modal {
+	font-size: 24px;
+	font-weight: bold;
+	color: #004986; 
+}
+.btn-close {
+	position: absolute;
+    top: -24px;
+    right: 0;
+    color: #fff;
+    /* background-color: #fff; */
+    filter: invert(100%);
+    opacity: 1;
+}
+
+
+/*----------------------------Animation---------------------------------*/
+@-webkit-keyframes fadedown {
+	from {
+		margin-top: -100px;
+		opacity: .1;
+	}
+	to {
+		margin-top: 0;
+		opacity: 1;
+	}
+}
+@keyframes fadedown {
+	from {
+		margin-top: -100px;
+		opacity: .1;
+	}
+	to {
+		margin-top: 0;
+		opacity: 1;
+	}
+}
+@-webkit-keyframes zoom-in {
+	from {
+		-webkit-transform: scale(.5);
+		-webkit-transform-origin: center;
+		opacity: .1;
+	}
+	to {
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: center;
+		opacity: 1;
+	}
+}
+@keyframes zoom-in {
+	from {
+		transform: scale(.5);
+		transform-origin: center;
+		opacity: .1;
+	}
+	to {
+		transform: scale(1);
+		transform-origin: center;
+		opacity: 1;
+	}
+}
+@-webkit-keyframes fadeup {
+	from {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+@keyframes fadeup {
+	from {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+.pulse {
+	animation-name: pulse;
+	-webkit-animation-name: pulse;
+	animation-duration: 1.5s;
+	-webkit-animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(0.9);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0.9);
+		opacity: 1;
+	}
+}
+@-webkit-keyframes pulse {
+	0% {
+		-webkit-transform: scale(0.95);
+		opacity: 1;
+	}
+	50% {
+		-webkit-transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: scale(0.95);
+		opacity: 1;
+	}
+}
