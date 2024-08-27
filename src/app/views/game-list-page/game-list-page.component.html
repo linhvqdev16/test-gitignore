@@ -1,0 +1,116 @@
+<div class="bg-distribute">
+    <div class="distribute-banner">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước phân
+                phối bản cài</h2>
+            <div class="row">
+                <div class="step step-01 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="0">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 1
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Chọn 1 game đang chơi
+                    </div>
+                </div>
+                <div class="step step-02 col-lg-6 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="50">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 2
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Đăng ký để trở thành Influencer của Game
+                    </div>
+                </div>
+                <div class="step step-03 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="100">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 3
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng của bạn và quảng bá mã
+                        của bạn.
+                    </div>
+                </div>
+            </div>
+            <p class="note" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">*Cần
+                xác thực tài khoản Social network</p>
+        </div>
+    </div>
+</div>
+<div class="games">
+    <div class="d-flex justify-content-center align-items-center py-5" data-aos="fade-down" data-aos-easing="linear"
+        data-aos-duration="500" data-aos-delay="0">
+        <h2 class="title">Games </h2>
+        <div class="sub-title">
+            Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng viết text
+        </div>
+    </div>
+    <div class="list-games" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
+        <section class="center slider mb-2">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (init)="slickInit()" (breakpoint)="breakpoint()" (afterChange)="afterChange()"
+                (beforeChange)="beforeChange()">
+                @for (item of serviceList; track item) {
+                <div ngxSlickItem class="slide">
+                    <div class="item-game text-center mx-auto brightness">
+                        <a href="register-aff.html" title="">
+                            <img src="{{item.serviceThumb}}" alt="" width="580" class="img-fluid" />
+                        </a>
+                        <div class="game d-flex justify-content-start align-items-center py-3">
+                            <div class="icon-game">
+                                <a href="register-aff.html">
+                                    <img src="{{item.serviceImage}}" alt="" width="143" class="img-fluid" />
+                                </a>
+                            </div>
+                            <div class="title-game">
+                                <h2>
+                                    <a href="register-aff.html" title="">
+                                        {{item.serviceName}}
+                                    </a>
+                                </h2>
+                                <div class="tag">
+                                    <a href="#" title="">
+                                        #Mobile
+                                    </a>
+                                    ,
+                                    <a href="#" title="">
+                                        #PRG
+                                    </a>
+                                    ,
+                                    <a href="#" title="">
+                                        #Chienthuat
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="compatible-os">
+                            <a href="#" title="">
+                                PC
+                            </a>
+                            <a href="#" title="">
+                                Android
+                            </a>
+                            <a href="#" title="">
+                                IOS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </ngx-slick-carousel>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('ready', function () {
+        $("center").sl
+    })
+</script>

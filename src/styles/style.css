@@ -1017,6 +1017,9 @@ a {
 .form-control, .form-select {
 	border: solid 1px #DBDBDB;
 }
+.img-fluid-custom{
+	margin-right: 5px;
+}
 @media (max-width: 992px) {
 	.profile-banner {
 		margin: 0;

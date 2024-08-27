@@ -8,7 +8,7 @@ import * as AOS from 'aos'
   styleUrl: './app.component.scss'
 })
 export class AppComponent  implements OnInit{
-  title = 'angular-influencer-html';
+  title = 'VTC Mobile Influencer';
 
   private isBrowser?: boolean;
 
@@ -17,7 +17,6 @@ export class AppComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log('Home Page Component'); 
     if (this.isBrowser) {
       AOS.init({ once: true, duration: 1000 });
     }

@@ -1,100 +1,125 @@
-<div class="bg-distribute">
-    <div class="distribute-banner">
-        <div class="container">
-            <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước nhận Quest Point</h2>
-            <div class="row">
-                <div class="step step-01 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
-                    <div class="btn-step">
-                        <a href="#" title="">
-                            Bước 1
-                        </a>
+<div>
+    <div class="bg-distribute">
+        <div class="distribute-banner">
+            <div class="container">
+                <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước
+                    nhận
+                    Quest Point</h2>
+                <div class="row">
+                    <div class="step step-01 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                        data-aos-duration="500" data-aos-delay="0">
+                        <div class="btn-step">
+                            <a href="#" title="">
+                                Bước 1
+                            </a>
+                        </div>
+                        <div class="description-step">
+                            Chọn một nhiệm vụ
+                            để bạn thực hiện
+                        </div>
                     </div>
-                    <div class="description-step">
-                        Chọn một nhiệm vụ 
-                        để bạn thực hiện
+                    <div class="step step-02 col-lg-6 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                        data-aos-duration="500" data-aos-delay="50">
+                        <div class="btn-step">
+                            <a href="#" title="">
+                                Bước 2
+                            </a>
+                        </div>
+                        <div class="description-step">
+                            Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng
+                        </div>
+                    </div>
+                    <div class="step step-03 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                        data-aos-duration="500" data-aos-delay="100">
+                        <div class="btn-step">
+                            <a href="#" title="">
+                                Bước 3
+                            </a>
+                        </div>
+                        <div class="description-step">
+                            Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng của bạn và quảng bá
+                            mã
+                            của bạn.
+                        </div>
                     </div>
                 </div>
-                <div class="step step-02 col-lg-6 zoom" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="50">
-                    <div class="btn-step">
-                        <a href="#" title="">
-                            Bước 2
-                        </a>
-                    </div>
-                    <div class="description-step">
-                        Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng
-                    </div>
-                </div>
-                <div class="step step-03 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">
-                    <div class="btn-step">
-                        <a href="#" title="">
-                            Bước 3
-                        </a>
-                    </div>
-                    <div class="description-step">
-                        Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng của bạn và quảng bá mã của bạn.
-                    </div>
-                </div>
+                <p class="note" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
+                    *Không thể sử dụng mã từ các nhiệm vụ đã hết hạn hoặc điểm liên kết phần thưởng đã hết hạn.</p>
             </div>
-            <p class="note" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">*Không thể sử dụng mã từ các nhiệm vụ đã hết hạn hoặc điểm liên kết phần thưởng đã hết hạn.</p>
         </div>
     </div>
-</div>
-<div class="quest">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-end py-5">
-            <h2 class="title">Quest list</h2>
-            <div class="sub-title">
-                <select class="form-select" ngModel="serviceModelSelected" (change)="changeSelectService()">
-                    <option *ngFor="let item of serviceGames" [value]="item">
-                        {{item.serviceName}}
-                    </option>
-                </select>
+    <div class="quest">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end py-5">
+                <h2 class="title">Quest list</h2>
+                <div class="sub-title">
+                    <select class="form-select" ngModel="serviceModelSelected" (change)="changeSelectService()">
+                        <option *ngFor="let item of serviceGames" [value]="item">
+                            {{item.serviceName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="list-quest">
+                <div class="row">
+                    <div *ngFor="let item of missions" class="col-lg-6 mb-3 brightness" data-aos="fade-up"
+                        data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
+                        <div class="thumb">
+                            <img src={{item.bannerUrl}} class="img-fluid" alt="" />
+                        </div>
+                        <h2 class="title-game">{{item.name}}</h2>
+                        <p class="date">Ngày hết hạn <strong>{{item.endDate | date: 'dd/MM/yyyy'}}</strong></p>
+                        <div class="btn-point">
+                            <a class="btn" title="">
+                                Tổng điểm thưởng: <strong>{{item.earnPoint |number}} Point</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pag">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" (click)="onChangePage()">
+                                &lang;
+                            </a>
+                        </li>
+                        <li class="page-item" *ngFor="let item of onGetPagination()">
+                            <a class="page-link active" (click)="onChangePage()">
+                                {{item}}
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" (click)="onChangePage()">
+                                &rang;
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="list-quest">
-            <div class="row">
-                <div *ngFor="let item of missions" class="col-lg-6 mb-3 brightness" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
-                    <div class="thumb">
-                        <img src={{item.bannerUrl}} class="img-fluid" alt="" />
-                    </div>
-                    <h2 class="title-game">{{item.name}}</h2>
-                    <p class="date">Ngày hết hạn <strong>{{item.endDate | date: 'dd/MM/yyyy'}}</strong></p>
-                    <div class="btn-point">
-                        <a class="btn" title="">
-                            Tổng điểm thưởng: <strong>{{item.earnPoint |number}} Point</strong>
-                        </a>
+    </div>
+    <div class="statistical">
+        <div class="card container border-0" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500"
+            data-aos-delay="0">
+            <div class="card-body">
+                <h2 class="title">Thống kê</h2>
+                <div class="row">
+                    <div *ngFor="let index of counter()" class="col-lg-4 zoom-50">
+                        <table class="table table-bordered">
+                            <tbody *ngFor="let item of onGetQuestTable(index)">
+                                <tr>
+                                    <td>{{item.eventName}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td><strong>{{item.questValue | number}} Point</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="pag">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            &lang;
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link active" href="#">
-                            1
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            2
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            3
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            &rang;
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        </div>
+        <div class="bg-statistical-right">
+            <img src="images/home-bg-leaf.png" class="img-fluid" alt="" />
         </div>
     </div>
 </div>

@@ -1,0 +1,65 @@
+<div class="bg-profile">
+    <div class="profile-banner">
+    </div>
+    <div class="profile-content">
+        <div class="container">
+            <div class="d-flex justify-content-start align-items-center pb-4">
+                <h4>
+                    <a class="" (click)="onNavPersonalPage()" title="Trang cá nhân">
+                        Trang cá nhân
+                    </a>
+                </h4>
+                <img src="images/line-white.png" class="img-fluid px-5" alt="" />
+                <h4>
+                    <a class="active" (click)="onNaReportCommonPage()" title="Báo cáo chi tiết">
+                        Báo cáo chi tiết
+                    </a>
+                </h4>
+            </div>
+            <div class="card my-4 border-0">
+                <div class="card-body text-start">
+                    <div class="nav-reports">
+                        <a class={{onGetClassTagReport(0)}} (click)="onChangeIndexReport(0)">
+                            Chi tiết lượt cài
+                        </a>
+                        <a class={{onGetClassTagReport(1)}} (click)="onChangeIndexReport(1)">
+                            Chi tiết lượt Nạp
+                        </a>
+                        <a class={{onGetClassTagReport(2)}} (click)="onChangeIndexReport(2)">
+                            Chi tiết Point
+                        </a>
+                        <a class={{onGetClassTagReport(3)}} (click)="onChangeIndexReport(3)">
+                            Chi tiết lượt theo dõi
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center pt-5 px-3 pb-3">
+                        <h6 class="fw-bold pe-3">Tên game</h6>
+                        <div>
+                            <select class="form-select">
+                                <option>Chọn game</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngStyle]="{display: indexTabReport == 0 ? 'block' : 'none'}">
+                <app-report-install></app-report-install>
+            </div>
+            <div [ngStyle]="{display: indexTabReport == 1 ? 'block' : 'none'}">
+                <app-report-deposits></app-report-deposits>
+            </div>
+            <div [ngStyle]="{display: indexTabReport == 2 ? 'block' : 'none'}">
+                <app-report-point></app-report-point>
+            </div>
+            <div [ngStyle]="{display: indexTabReport == 3 ? 'block' : 'none'}">
+                <app-report-follow></app-report-follow>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-home-right">
+    <img src="images/home-bg-circle.png" class="img-fluid" alt="" />
+</div>

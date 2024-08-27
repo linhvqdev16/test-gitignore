@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UrlDefine } from '../../../../commons/url-define';
 
@@ -18,14 +18,21 @@ export class HeaderPageComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log('header component');
+    // console.log('header component');
   }
   ngQuest(): void {
-    debugger;
     this.router?.navigateByUrl(UrlDefine.QuestPage);
   }
   ngHome(): void{
-    debugger;
     this.router.navigateByUrl(UrlDefine.HomePage);
+  }
+  onNavRegister() : void{
+    this.router.navigateByUrl(UrlDefine.RegisterGamerPage);
+  }
+  onNavListGame() : void {
+    this.router.navigateByUrl(UrlDefine.GameListPage); 
+  }
+  onNavPersonalPage() : void {
+    this.router.navigateByUrl(UrlDefine.PersonalPage);
   }
 }
