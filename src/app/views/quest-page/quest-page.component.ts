@@ -6,6 +6,7 @@ import { MissionService } from '../../services/mission-service';
 import { BasePageComponent } from '../../commons/base-page-component';
 import { Subject, takeUntil } from 'rxjs';
 import { GetListMissionRequest } from '../../request/get-list-mission-request';
+import { error } from 'console';
 
 @Component({
   selector: 'app-quest-page',
@@ -64,7 +65,6 @@ export class QuestPageComponent extends BasePageComponent implements OnInit, OnD
 
 
   onGets() {
-    debugger;
     if (this.getListMissionRequest == undefined) {
       this.getListMissionRequest = {
         pageIndex: this.pageIndex,
@@ -72,15 +72,24 @@ export class QuestPageComponent extends BasePageComponent implements OnInit, OnD
         serviceId: 0
       }
     }
-    this.getListMissionRequest.serviceId = 120323;
-    this.missionService.Get(this.getListMissionRequest).pipe(takeUntil(this.destroy$)).subscribe(
-      result => {
-        if (result.status) {
-          var a = result.data;
+    this.getListMissionRequest.serviceId = 330413;
+    this.missionService.Get(this.getListMissionRequest).subscribe(
+      {
+        next: (result) => {
+        if(result){
+          if(result.status){
+            console.log('HIHI');
+          }
+        }
+        }, 
+        error: (error) => {
+          console.log(error);
         }
       }
     )
   }
+
+
 
   onGetMissions() {
     this.missions = new Array<MissionModel>();
