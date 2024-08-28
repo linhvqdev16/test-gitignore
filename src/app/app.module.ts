@@ -17,6 +17,9 @@ import { ReportInstallComponent } from './views/report/report-install/report-ins
 import { ReportPointComponent } from './views/report/report-point/report-point.component';
 import { ReportCommonComponent } from './views/report/report-common/report-common.component'
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SpinnerPageComponent } from './views/defaults/spinner/spinner-page/spinner-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +33,16 @@ import { HttpClientModule } from '@angular/common/http';
     ReportFollowComponent,
     ReportInstallComponent,
     ReportPointComponent,
-    ReportCommonComponent, 
+    ReportCommonComponent,
+    SpinnerPageComponent, 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule, 
-    HttpClientModule
+    HttpClientModule, 
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideClientHydration()

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UrlDefine } from '../../../commons/url-define';
 
 @Component({
   selector: 'app-footer-page',
@@ -11,13 +13,23 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FooterPageComponent implements OnInit {
 
-  constructor(){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
   }
 
   ngNavigate(url: string){
     window.open(url, 'blank');
+  }
+
+  onNavListGame(){
+    this.router.navigateByUrl(UrlDefine.GameListPage); 
+  }
+  onNavMissionPage(){
+    this.router.navigateByUrl(UrlDefine.QuestPage); 
+  }
+  onNavPersonalPage(){
+    this.router.navigateByUrl(UrlDefine.PersonalPage);
   }
 
 }

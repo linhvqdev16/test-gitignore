@@ -1,9 +1,9 @@
 export interface QuestModel{
     id: number; 
     missionId?: number; 
-    name: string; 
+    name?: string; 
     eventName?: string; 
-    questValue: number;
+    questValue?: number;
     jsonConfig?: string; 
     totalRecord?: number; 
     missionName?: string;

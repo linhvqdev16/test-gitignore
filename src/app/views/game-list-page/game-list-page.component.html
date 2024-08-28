@@ -52,65 +52,64 @@
             Nhận mã hoạt động cho nhiệm vụ và đăng mã đó theo biểu mẫu trên nền tảng viết text
         </div>
     </div>
-    <div class="list-games" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
-        <section class="center slider mb-2">
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                (init)="slickInit()" (breakpoint)="breakpoint()" (afterChange)="afterChange()"
-                (beforeChange)="beforeChange()">
-                @for (item of serviceList; track item) {
-                <div ngxSlickItem class="slide">
-                    <div class="item-game text-center mx-auto brightness">
-                        <a href="register-aff.html" title="">
-                            <img src="{{item.serviceThumb}}" alt="" width="580" class="img-fluid" />
-                        </a>
-                        <div class="game d-flex justify-content-start align-items-center py-3">
-                            <div class="icon-game">
-                                <a href="register-aff.html">
-                                    <img src="{{item.serviceImage}}" alt="" width="143" class="img-fluid" />
-                                </a>
-                            </div>
-                            <div class="title-game">
-                                <h2>
-                                    <a href="register-aff.html" title="">
-                                        {{item.serviceName}}
-                                    </a>
-                                </h2>
-                                <div class="tag">
-                                    <a href="#" title="">
-                                        #Mobile
-                                    </a>
-                                    ,
-                                    <a href="#" title="">
-                                        #PRG
-                                    </a>
-                                    ,
-                                    <a href="#" title="">
-                                        #Chienthuat
+    @if(serviceList != undefined && serviceList.length > 0){
+        <div class="list-games" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
+            <section class="center slider mb-2">
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                    (init)="slickInit()" (breakpoint)="breakpoint()" (afterChange)="afterChange()"
+                    (beforeChange)="beforeChange()">
+                    @for (item of serviceList; track item) {
+                    <div ngxSlickItem class="slide">
+                        <div class="item-game text-center mx-auto brightness">
+                            <a href="register-aff.html" title="">
+                                <img src="{{item.bannerUrl}}" alt="" width="580" class="img-fluid" />
+                            </a>
+                            <div class="game d-flex justify-content-start align-items-center py-3">
+                                <div class="icon-game">
+                                    <a href="register-aff.html">
+                                        <img src="{{item.imageUrl}}" alt="" width="143" class="img-fluid" />
                                     </a>
                                 </div>
+                                <div class="title-game">
+                                    <h2>
+                                        <a href="register-aff.html" title="">
+                                            {{item.serviceName}}
+                                        </a>
+                                    </h2>
+                                    <div class="tag">
+                                        <a href="#" title="">
+                                            #Mobile
+                                        </a>
+                                        ,
+                                        <a href="#" title="">
+                                            #PRG
+                                        </a>
+                                        ,
+                                        <a href="#" title="">
+                                            #Chienthuat
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compatible-os">
+                                <a href="#" title="">
+                                    PC
+                                </a>
+                                <a href="#" title="">
+                                    Android
+                                </a>
+                                <a href="#" title="">
+                                    IOS
+                                </a>
                             </div>
                         </div>
-                        <div class="compatible-os">
-                            <a href="#" title="">
-                                PC
-                            </a>
-                            <a href="#" title="">
-                                Android
-                            </a>
-                            <a href="#" title="">
-                                IOS
-                            </a>
-                        </div>
                     </div>
-                </div>
-                }
-            </ngx-slick-carousel>
-        </section>
-    </div>
+                    }
+                </ngx-slick-carousel>
+            </section>
+        </div>
+    }
+    @else {
+        
+    }
 </div>
-
-<script type="text/javascript">
-    $(document).on('ready', function () {
-        $("center").sl
-    })
-</script>

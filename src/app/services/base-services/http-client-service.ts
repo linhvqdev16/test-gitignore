@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { json } from "stream/consumers";
 import { catchError, finalize, map, Observable, share } from "rxjs";
 import { Common } from "../../commons/common";
+import { error } from "console";
 
 @Injectable({
     providedIn: 'root',
@@ -48,10 +49,13 @@ export class HttpClientService {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         });
-        let respone = this.http.post(url, obj, { headers: header })
-            .pipe(share());
-        this.handleErrorObservable(respone);
-        return respone;
+        return this.http.post(url, obj, { headers: header })
+            .pipe(map((response) => {
+                return response;
+            }), catchError((error) => {
+                const errorObj = {statusCode: error.status, errorMessage: error.message, dateTime: new Date()}
+                return this.handleErrorObservable(error);
+            }));
     }
     getJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
