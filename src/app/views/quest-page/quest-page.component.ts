@@ -41,7 +41,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.onGetServices();
     this.onGetMissions();
     this.onGetQuests();

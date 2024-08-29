@@ -1,10 +1,11 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { SlickCarouselComponent, SlickCarouselModule } from 'ngx-slick-carousel';
 import { ServiceModel } from '../../models/service-model';
 import { GameService } from '../../services/game-service';
 import { BaseRequest } from '../../request/base-request';
 import { BasePageComponent } from '../../commons/base-page-component';
+import { SampleComponent } from '../sample/sample.component';
 
 @Component({
   selector: 'app-game-list-page',
@@ -13,15 +14,22 @@ import { BasePageComponent } from '../../commons/base-page-component';
   templateUrl: './game-list-page.component.html',
   styleUrl: './game-list-page.component.scss'
 })
-export class GameListPageComponent extends BasePageComponent implements OnInit {
+export class GameListPageComponent extends BasePageComponent implements OnInit, AfterViewInit {
 
   serviceList: Array<ServiceModel> | undefined;
 
-  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) { 
+  @ViewChild(SampleComponent)
+  sampleComponent?: SampleComponent;
+
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {
     super();
   }
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.onGetServiceList();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('value', this.sampleComponent);
   }
   slideConfig = {
     "slidesToShow": 2,
@@ -43,20 +51,23 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
     ]
   }
 
-  onGetServiceList(){
+
+  onGetServiceList() {
+    this.isSetLoading();
     this.serviceList = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
-      pageIndex: this.pageIndex, 
+      pageIndex: this.pageIndex,
       pageSize: this.pageSize
     }
     this.gameService.Get(baseRequest).subscribe({
       next: (result) => {
-        if(result){
-          if(result.code == 1){
-            this.serviceList = result.data; 
+        if (result) {
+          if (result.code == 1) {
+            this.serviceList = result.data;
+            this.unSetLoading();
           }
         }
-      }, 
+      },
       error: (error) => {
         console.log(error);
       }
@@ -66,15 +77,15 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
   slickInit() {
     console.log('slick initialized');
   }
-  
+
   breakpoint() {
     console.log('breakpoint');
   }
-  
+
   afterChange() {
     console.log('afterChange');
   }
-  
+
   beforeChange() {
     console.log('beforeChange');
   }
