@@ -1,0 +1,23 @@
+export interface InfluencerModel {
+    id?: number,
+    scoinId?: number,
+    scoinName?: string,
+    point?: number,
+    serviceId?: number,
+    agencyId?: number,
+    serverId?: number,
+    roleId?: number,
+    roleName?: string,
+    nickName?: string,
+    slogan?: string,
+    referenceName?: string,
+    youtubeChannel?: string,
+    liveGChannel?: string,
+    twitchChannel?: string,
+    linkPath?: string,
+    createDate?: Date,
+    lastUpdate?: Date,
+    status?: number,
+    userStatus?: number,
+    objectType?: number
+}

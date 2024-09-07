@@ -19,7 +19,6 @@ export class SampleComponent  implements OnInit , AfterViewInit, OnDestroy{
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
   ngAfterViewInit(): void {
-    debugger;
     if (this.viewLoading$) {
   		const loadingSubscription = this.viewLoading$.subscribe(res => this.ngShowSpinner(res));
   		this.subscriptions.push(loadingSubscription);
@@ -28,7 +27,6 @@ export class SampleComponent  implements OnInit , AfterViewInit, OnDestroy{
   	}
   }
   ngOnInit(): void {
-    console.log('SpinnerPageComponent');
   }
 
   ngShowSpinner(bol: boolean){

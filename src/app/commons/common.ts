@@ -1,4 +1,5 @@
 import { environment } from "../../environments/environment.development";
+import { LocalStorageKey } from "../core/local-storage/local-storage-key";
 
 declare var $:any; 
 
@@ -10,7 +11,28 @@ export class Common{
         return `${environment.apiUrl}${absolutePath}`;
     }
     public static GetAuthenToken(): string {
-        // return localStorage.getItem(this.LocalStorageAuthenKey) || '';
-        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjE1ODIwODg4NjIiLCJ1c2VybmFtZSI6ImNvbmdtaW5oMTIzeCIsImFjY2Vzc190b2tlbiI6ImsxNTgyMDg4ODYyLjE3MjQ4NTg4NjcuUlFCSUFFd0FiZ0JvQUdFQVV3QmlBRmdBZHdCVkFIa0FOUUJRQURRQVNRQmxBRm9BVndCS0FIZ0FVUUE5QUQwQSIsIm5iZiI6MTcyNDc3MjQ3NCwiZXhwIjoxNzI0Nzc2MDc0LCJpYXQiOjE3MjQ3NzI0NzR9._ZWGAiCD7Ziop5Ze8WkHu8kwn7qKf_4X9dxcdBZXzBE";
+        return localStorage.getItem(LocalStorageKey.TOKEN) || '';
+    }
+
+    public static GetClienId(){
+        return `${environment.client_id}`; 
+    }
+    public static GetClientSecret(){
+        return `${environment.client_secret}`; 
+    }
+    public static GetServiceId(){
+        return  `${environment.serviceId}`; 
+    }
+    public static GetAuthorUrl(){
+        return `${environment.author_url}`; 
+    }
+    public static GetAccessTokenUrl(){
+        return `${environment.get_accesstoken_url}`; 
+    }
+    public static GetUserInfoUrl(){
+        return `${environment.get_userinfo_url}`; 
+    }
+    public static GetRegisterUrl(){
+        return `${environment.register_url}`;
     }
 }

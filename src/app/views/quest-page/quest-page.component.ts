@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ServiceModel } from '../../models/service-model';
 import { MissionModel } from '../../models/mission-model';
 import { QuestModel } from '../../models/quest-model';
@@ -14,6 +14,8 @@ import { BaseRequest } from '../../request/base-request';
 import { QuestService } from '../../services/quest-service';
 import { GetQuestByMissionRequest } from '../../request/get-quest-by-mission-request';
 import { BaseModelResponse } from '../../response/base-response';
+import { SampleComponent } from '../sample/sample.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quest-page',
@@ -34,21 +36,18 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
   arrayTable: Array<number> | undefined;
 
   constructor(private missionService: MissionService,
-    private spinner: NgxSpinnerService,
     private gameService: GameService,
     private questService: QuestService,
     private cdr: ChangeDetectorRef) {
     super();
   }
-
   override ngOnInit(): void {
     this.onGetServices();
     this.onGetMissions();
     this.onGetQuests();
   }
-
   onGetServices() {
-    this.spinner.show();
+    this.isSetLoading();
     let initialService: ServiceModel = {
       id: 0,
       serviceId: 0,
@@ -67,19 +66,20 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.serviceGames = result.data;
               this.serviceGames?.splice(0, 0, initialService);
             }
+            this.unSetLoading();
+            this.cdr.detectChanges();
           }
-          this.spinner.hide();
-          this.cdr.detectChanges();
         },
         error: (error) => {
-          this.spinner.hide();
           console.log(error);
+          this.unSetLoading();
+          this.cdr.detectChanges();
         }
       }
     )
   }
   onGetMissions() {
-    this.spinner.show();
+    this.isSetLoading();
     if (this.getListMissionRequest == undefined) {
       this.getListMissionRequest = {
         pageIndex: this.pageIndex,
@@ -98,22 +98,23 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.missions = data.data;
               this.totalRecord = data.totalRecord;
             }
+            this.unSetLoading();
+            this.cdr.detectChanges();
           }
-          this.spinner.hide();
-          this.cdr.detectChanges();
         },
         error: (error) => {
-          this.spinner.hide();
           console.log(error);
+          this.unSetLoading();
+          this.cdr.detectChanges();
         }
       }
     )
   }
-  getQuestByMissionRequest: GetQuestByMissionRequest| undefined;
+  getQuestByMissionRequest: GetQuestByMissionRequest | undefined;
   onGetQuests() {
-    this.spinner.show();
+    this.isSetLoading();
     this.quests = new Array<QuestModel>();
-    if(this.getQuestByMissionRequest == undefined){
+    if (this.getQuestByMissionRequest == undefined) {
       this.getQuestByMissionRequest = {
         missionId: 0
       };
@@ -125,14 +126,15 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
             if (result.status) {
               let data: BaseModelResponse = result.data;
               this.quests = data.data;
-              this.getNumberTable((data.totalRecord ?? 0 ) % 3 == 1 ? Math.floor((data.totalRecord ?? 0 )/ 3) + 1 : (data.totalRecord ?? 0 )/ 3);
+              this.getNumberTable((data.totalRecord ?? 0) % 3 == 1 ? Math.floor((data.totalRecord ?? 0) / 3) + 1 : (data.totalRecord ?? 0) / 3);
             }
+            this.unSetLoading();
+            this.cdr.detectChanges();
           }
-          this.spinner.hide();
-          this.cdr.detectChanges();
         },
         error: (error) => {
-          this.spinner.hide();
+          this.unSetLoading();
+          this.cdr.detectChanges();
           console.log(error);
         }
       }
@@ -154,18 +156,15 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
     }
     return arrayTable;
   }
-
   getNumberTable(val: number): void {
     this.arrayTable = new Array<number>();
     for (let i = 0; i < val; i++) {
       this.arrayTable.push(i);
     }
   }
-
   changeSelectService() {
     this.pageIndex = 1;
     this.onGetMissions();
   }
-
   onChangePage() { }
 }

@@ -53,7 +53,7 @@ export class HttpClientService {
             .pipe(map((response) => {
                 return response;
             }), catchError((error) => {
-                const errorObj = {statusCode: error.status, errorMessage: error.message, dateTime: new Date()}
+                const errorObj = { statusCode: error.status, errorMessage: error.message, dateTime: new Date() }
                 return this.handleErrorObservable(error);
             }));
     }
@@ -66,14 +66,15 @@ export class HttpClientService {
         });
         const httpParams: HttpParamsOptions = { fromObject: obj } as HttpParamsOptions;
         return this.http.get(
-             url
-            ,{headers: header, params: new HttpParams(httpParams)}
-            ).pipe(map((response) => {
-              return response;
-            }), catchError((err) => {
-                const errorObj = {statusCode: err.status, errorMessage: err.message, datetime: new Date()}
-                return this.handleErrorObservable(errorObj);
-            }))
+            url
+            , { headers: header, params: new HttpParams(httpParams) }
+        ).pipe(map((response) => {
+            console.log(response);
+            return response;
+        }), catchError((err) => {
+            const errorObj = { statusCode: err.status, errorMessage: err.message, datetime: new Date() }
+            return this.handleErrorObservable(errorObj);
+        }));
     }
     deleteJsonAuthenObservale(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);

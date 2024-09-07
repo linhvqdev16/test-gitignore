@@ -1,3 +1,4 @@
+<app-spinner-page></app-spinner-page>
 <div class="bg-profile">
     <div class="profile-banner">
     </div>
@@ -11,7 +12,7 @@
                 </h4>
                 <img src="images/line-white.png" class="img-fluid px-5" alt="" />
                 <h4>
-                    <a (click)="onNaReportCommonPage()" title="Báo cáo chi tiết">
+                    <a class="title-page" (click)="onNaReportCommonPage()" title="Báo cáo chi tiết">
                         Báo cáo chi tiết
                     </a>
                 </h4>
@@ -22,35 +23,36 @@
                         <div class="card-body account text-start">
                             <h2>Thông tin tài khoản</h2>
                             <div class="info">
-                                <p class="mb-0"><span class="name">Ngọc Trinh</span><span class="mail ps-2">(ngoctrinh89&364gmail.com)</span></p>
+                                <p class="mb-0"><span class="name">{{influencerModel?.nickName}}</span><span
+                                        class="mail ps-2">(ngoctrinh89&364gmail.com)</span></p>
                             </div>
                             <p class="small">(*Chờ phê duyệt/ Đã phê duyệt)</p>
                             <div class="social text-end">
-                                <a class="text-decoration-none" href="#">
+                                <a class="text-decoration-none" href="{{influencerModel?.liveGChannel}}">
                                     <img src="images/icon-liveg.png" alt="" class="img-fluid img-fluid-custom">
                                 </a>
-                                <a class="text-decoration-none" href="#">
+                                <a class="text-decoration-none" href="{{influencerModel?.youtubeChannel}}">
                                     <img src="images/icon-ytb-xl.png" alt="" class="img-fluid img-fluid-custom">
                                 </a>
-                                <a class="text-decoration-none" href="#">
+                                <a class="text-decoration-none" href="{{influencerModel?.twitchChannel}}">
                                     <img src="images/icon-tiktok-xl.png" alt="" class="img-fluid img-fluid-custom">
                                 </a>
                             </div>
                             <div class="copy py-2">
-                                <span class="pe-0">Link phân phối</span>
-                                <a class="ps-2" href="#">
+                                <span class="pe-0">Link phân phối: {{influencerModel?.linkPath}}</span>
+                                <a class="ps-2" (click)="onCopyLinkPathClipboar()">
                                     <img src="images/icon-copy.png" alt="" class="img-fluid" />
                                 </a>
                             </div>
                             <div class="copy py-2">
-                                <span class="pe-0">Mã giới thiệu</span>
-                                <a class="ps-2" href="#">
+                                <span class="pe-0">Mã giới thiệu: {{influencerModel?.referenceName}}</span>
+                                <a class="ps-2" (click)="onCopyLinkPathReferenName()">
                                     <img src="images/icon-copy.png" alt="" class="img-fluid" />
                                 </a>
                             </div>
                             <div class="copy py-2">
-                                <span class="pe-2">Lời giới thiệu</span>
-                                <a class="btn-edit" href="#" title="Chỉnh sửa">
+                                <span class="pe-2">Lời giới thiệu: {{influencerModel?.slogan}}</span>
+                                <a class="btn-edit" title="Chỉnh sửa">
                                     Chỉnh sửa
                                 </a>
                             </div>
@@ -66,29 +68,29 @@
                                     Tên game
                                 </div>
                                 <div class="col-lg-9 text-start py-2">
-                                    <select class="form-select">
-                                        <option>Chọn Game</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <select class="form-select" ngModel="serviceSelected">
+                                        @for(item of serviceModels; track item){
+
+                                        <option>{{item.serviceName}}</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-lg-3 text-end fw-bold py-2">
                                     Tên server
                                 </div>
                                 <div class="col-lg-9 text-start server py-2">
-                                    Ngọc Trinh 89
+                                    {{firstSeverModel?.serverName}}
                                 </div>
                                 <div class="col-lg-6 text-center">
                                     <div class="total">
                                         <h4 class="title-total">Tổng nạp</h4>
-                                        <h2 class="number-total">60.000</h2>
+                                        <h2 class="number-total">0</h2>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-center">
                                     <div class="total">
                                         <h4 class="title-total">Tổng Point</h4>
-                                        <h2 class="number-total">90.000</h2>
+                                        <h2 class="number-total">{{(influencerModel?.point ?? 0 | number:'1.0-0')?.replace(',', '.')}}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -105,9 +107,11 @@
                             <button type="button" class="btn">Hôm nay</button>
                             <button type="button" class="btn">1 tuần</button>
                             <button type="button" class="btn">1 tháng</button>
-                            <button type="button" class="btn ms-4">08/12/2024 <img src="images/icon-calendar.png" class="img-fluid" alt="" /></button>
+                            <button type="button" class="btn ms-4">08/12/2024 <img src="images/icon-calendar.png"
+                                    class="img-fluid" alt="" /></button>
                             <span>~</span>
-                            <button type="button" class="btn">08/12/2024 <img src="images/icon-calendar.png" class="img-fluid" alt="" /></button>
+                            <button type="button" class="btn">08/12/2024 <img src="images/icon-calendar.png"
+                                    class="img-fluid" alt="" /></button>
                         </div>
                         <div class="btn-check-xl">
                             <a href="#" title="Kiểm tra">

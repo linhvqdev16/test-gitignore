@@ -8,14 +8,17 @@ import { GameListPageComponent } from './views/game-list-page/game-list-page.com
 import { PersonalPageComponent } from './views/personal-page/personal-page.component';
 import { RegisterGamerPageComponent } from './views/register-gamer-page/register-gamer-page.component';
 import { ReportCommonComponent } from './views/report/report-common/report-common.component';
+import { AuthGuard } from './core/auth/auth-guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home-page', pathMatch: 'full' },
     {path: 'home-page', component: HomePageComponent}, 
     {path: 'quest-page', component: QuestPageComponent}, 
     {path: 'game-list-page', component: GameListPageComponent}, 
     {path: 'personal-page', component: PersonalPageComponent}, 
     {path: 'register-gamer-page', component: RegisterGamerPageComponent}, 
-    {path: 'report-common', component: ReportCommonComponent}
+    {path: 'report-common', component: ReportCommonComponent},
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

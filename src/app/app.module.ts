@@ -21,6 +21,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerPageComponent } from './views/defaults/spinner/spinner-page/spinner-page.component';
 import { SampleComponent } from './views/sample/sample.component';
+import { httpInterceptorProviders } from './services/base-services/http-request-interceptor-service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NumberPipe } from './commons/number-pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +38,9 @@ import { SampleComponent } from './views/sample/sample.component';
     ReportInstallComponent,
     ReportPointComponent,
     ReportCommonComponent,
-    SpinnerPageComponent,
     SampleComponent, 
+    SpinnerPageComponent, 
+    NumberPipe
   ],
   imports: [
     BrowserModule,
@@ -44,13 +48,17 @@ import { SampleComponent } from './views/sample/sample.component';
     NgbModule, 
     HttpClientModule, 
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule, 
+    NgxSpinnerModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(), 
+    httpInterceptorProviders, provideAnimationsAsync()
   ],
   bootstrap: [AppComponent], 
   exports: [
-  ]
+    NgxSpinnerModule
+  ], 
+  schemas: []
 })
 export class AppModule { }

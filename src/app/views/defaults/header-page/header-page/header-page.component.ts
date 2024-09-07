@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UrlDefine } from '../../../../commons/url-define';
+import { Common } from '../../../../commons/common';
+import { BasePageComponent } from '../../../../commons/base-page-component';
 
 @Component({
   selector: 'app-header-page',
@@ -10,29 +12,40 @@ import { UrlDefine } from '../../../../commons/url-define';
     './header-page.component.scss',
   ],
 })
-export class HeaderPageComponent implements OnInit {
+export class HeaderPageComponent extends BasePageComponent implements OnInit {
 
   private returlUrl: string | undefined;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, activatedRoute: ActivatedRoute) 
+  {
+    super();
+  }
 
-  ngOnInit(): void {
-    // console.log('header component');
+  override ngOnInit(): void {
   }
   ngQuest(): void {
     this.router?.navigateByUrl(UrlDefine.QuestPage);
   }
-  ngHome(): void{
+  ngHome(): void {
     this.router.navigateByUrl(UrlDefine.HomePage);
   }
-  onNavRegister() : void{
+  onNavRegister(): void {
     this.router.navigateByUrl(UrlDefine.RegisterGamerPage);
   }
-  onNavListGame() : void {
-    this.router.navigateByUrl(UrlDefine.GameListPage); 
+  onNavListGame(): void {
+    this.router.navigateByUrl(UrlDefine.GameListPage);
   }
-  onNavPersonalPage() : void {
+  onNavPersonalPage(): void {
     this.router.navigateByUrl(UrlDefine.PersonalPage);
+  }
+  onLogin() {
+    let loginUrl: string = "";
+    loginUrl = Common.GetAuthorUrl();
+    loginUrl = loginUrl.replace('clientValue', Common.GetClienId());
+    let originUrl: string = encodeURI(window.location.href);
+    loginUrl = loginUrl.replace('redirecUrl', originUrl);
+    loginUrl = loginUrl.replace('agencyValue', '0');
+    window.open(loginUrl);
   }
 }

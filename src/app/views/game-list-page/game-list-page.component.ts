@@ -1,11 +1,12 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { SlickCarouselComponent, SlickCarouselModule } from 'ngx-slick-carousel';
+import {  ChangeDetectorRef, Component, Inject, OnInit,  } from '@angular/core';
+import {  SlickCarouselModule } from 'ngx-slick-carousel';
 import { ServiceModel } from '../../models/service-model';
 import { GameService } from '../../services/game-service';
 import { BaseRequest } from '../../request/base-request';
 import { BasePageComponent } from '../../commons/base-page-component';
-import { SampleComponent } from '../sample/sample.component';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-game-list-page',
@@ -14,22 +15,15 @@ import { SampleComponent } from '../sample/sample.component';
   templateUrl: './game-list-page.component.html',
   styleUrl: './game-list-page.component.scss'
 })
-export class GameListPageComponent extends BasePageComponent implements OnInit, AfterViewInit {
+export class GameListPageComponent extends BasePageComponent implements OnInit {
 
   serviceList: Array<ServiceModel> | undefined;
 
-  @ViewChild(SampleComponent)
-  sampleComponent?: SampleComponent;
-
-  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef, private spinner: NgxSpinnerService) {
     super();
   }
   override ngOnInit(): void {
     this.onGetServiceList();
-  }
-
-  ngAfterViewInit(): void {
-    console.log('value', this.sampleComponent);
   }
   slideConfig = {
     "slidesToShow": 2,
@@ -65,11 +59,14 @@ export class GameListPageComponent extends BasePageComponent implements OnInit, 
           if (result.code == 1) {
             this.serviceList = result.data;
             this.unSetLoading();
+            this.cdr.detectChanges();
           }
         }
       },
       error: (error) => {
         console.log(error);
+        this.unSetLoading(); 
+        this.cdr.detectChanges();
       }
     });
   }
