@@ -38,7 +38,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
   }
 
   onGetServiceModels() {
-    this.isSetLoading();
+    // this.isSetLoading();
     this.serviceModels = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
       pageIndex: 1,
@@ -51,19 +51,19 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
             this.serviceModels = result.data;
           }
         }
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });
   }
 
   onGetServerModels() {
-    this.isSetLoading();
+    // this.isSetLoading();
     this.serverModels = new Array<ServerModel>();
     let request: GetServerRequest = {
       serviceId: this.serviceSelected ?? 0
@@ -80,7 +80,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
                   this.roleModels = this.roleModels?.concat(item.roles);
                 }
               }
-              this.unSetLoading();
+              // this.unSetLoading();
               this.cdr.detectChanges();
             }
           }
@@ -88,7 +88,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });

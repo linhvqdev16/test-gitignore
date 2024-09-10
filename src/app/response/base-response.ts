@@ -3,6 +3,7 @@ export class BaseRespone{
     errorCode?: number; 
     message?: string; 
     data?: any
+    code?: number
 }
 
 export class BaseListRespone{

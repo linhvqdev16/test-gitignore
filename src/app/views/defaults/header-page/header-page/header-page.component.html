@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand ps-3" href="javascript:void(0)">
-                <img src="./images/logo-vtcmobile-white.png" class="img-fluid" alt="" />
+                <img src="images/logo-vtcmobile-white.png" class="img-fluid" alt="" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -29,18 +29,21 @@
                             Trang cá nhân
                         </a>
                     </li>
+                    @if(this.isLoggin === false){
                     <li class="nav-item btn-login">
                         <a class="nav-link d-flex align-items-center" (click)="onLogin()" data-bs-toggle="modal">
                             <img src="images/icon-user.png" class="img-fluid" alt="" />
                             <span class="ps-2">Đăng nhập</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item d-flex align-items-center">
-                        <span class="text-info">[ Xin chào: Ngọc Trinh - </span>
-                        <a class="nav-link" href="#" title="Thoát">								
-                             <span class="text-info">Thoát ]</span>
+                    }
+                    @else {
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="text-info">[ Xin chào: {{userModel?.accountName ?? 'Ngọc Trinh'}} - </span>
+                        <a class="nav-link" href="#" title="Thoát">
+                            <span class="text-info" (click)="onLogout()">Thoát ]</span>
                         </a>
-                    </li> -->
+                    </li>}
                 </ul>
             </div>
         </div>

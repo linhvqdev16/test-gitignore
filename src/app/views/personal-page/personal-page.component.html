@@ -1,4 +1,4 @@
-<app-spinner-page></app-spinner-page>
+<!-- <app-spinner-page></app-spinner-page> -->
 <div class="bg-profile">
     <div class="profile-banner">
     </div>
@@ -68,10 +68,9 @@
                                     Tên game
                                 </div>
                                 <div class="col-lg-9 text-start py-2">
-                                    <select class="form-select" ngModel="serviceSelected">
+                                    <select class="form-select" ngModel="serviceSelected" (change)="onChangeServiceSelected($event)">
                                         @for(item of serviceModels; track item){
-
-                                        <option>{{item.serviceName}}</option>
+                                        <option value="{{item.serviceId}}">{{item.serviceName}}</option>
                                         }
                                     </select>
                                 </div>
@@ -124,20 +123,20 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="total">
-                                        <h4 class="title-total">Số lượt cài đặt</h4>
-                                        <h2 class="number-total">678</h2>
+                                        <h4 class="title-total">Số người dùng</h4>
+                                        <h2 class="number-total">{{(serviceGetInfoModel?.totalUsers ?? 0 | number)?.replaceAll(',', '.')}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="total">
+                                        <h4 class="title-total">Số lượt clicks</h4>
+                                        <h2 class="number-total">{{(serviceGetInfoModel?.totalClicks ?? 0 | number)?.replaceAll(',', '.')}}</h2>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="total">
                                         <h4 class="title-total">Số lượt cài đặt</h4>
-                                        <h2 class="number-total">696</h2>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="total">
-                                        <h4 class="title-total">Số lượt cài đặt</h4>
-                                        <h2 class="number-total">868</h2>
+                                        <h2 class="number-total">{{(serviceGetInfoModel?.totalInstall ?? 0 | number)?.replaceAll(',', '.')}}</h2>
                                     </div>
                                 </div>
                             </div>

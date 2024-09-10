@@ -19,6 +19,6 @@ export interface ServiceModel{
     totalInstall?: number; 
     status?: number; 
     userStatus?: number; 
-    totalClick?: number;
+    totalClicks?: number;
     gameGenre?: string;
 }

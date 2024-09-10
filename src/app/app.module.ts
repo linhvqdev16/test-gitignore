@@ -20,10 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerPageComponent } from './views/defaults/spinner/spinner-page/spinner-page.component';
-import { SampleComponent } from './views/sample/sample.component';
+// import { SampleComponent } from './views/sample/sample.component';
 import { httpInterceptorProviders } from './services/base-services/http-request-interceptor-service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NumberPipe } from './commons/number-pipe';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { NumberPipe } from './commons/number-pipe';
     ReportInstallComponent,
     ReportPointComponent,
     ReportCommonComponent,
-    SampleComponent, 
+    // SampleComponent, 
     SpinnerPageComponent, 
     NumberPipe
   ],
@@ -53,7 +54,8 @@ import { NumberPipe } from './commons/number-pipe';
   ],
   providers: [
     provideClientHydration(), 
-    httpInterceptorProviders, provideAnimationsAsync()
+    httpInterceptorProviders, provideAnimationsAsync(), 
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent], 
   exports: [

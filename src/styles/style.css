@@ -888,7 +888,6 @@ a {
 .profile-content .account .copy {
 	font-size: 16px;
 	font-weight: 500;
-	margin-top: 7px;
 }
 .profile-content .account .btn-edit {
 	background-color: #D9D9D9;
@@ -905,7 +904,7 @@ a {
 	color: #353232;
 }
 .profile-content .game-info {
-	padding: 40px 24px;
+	padding: 43px 24px;
 }
 .profile-content .game-info .form-select option {
 	font-size: 13px;

@@ -4,6 +4,7 @@ export class UrlAPIDefine{
 
     /// Service 
     public static GetListService = '/api/Services/list'; 
+    public static GetInfoService = '/api/Services/info';
 
     /// Quest 
     public static GetQuestByMissionId = '/mission/getMissionQuest'

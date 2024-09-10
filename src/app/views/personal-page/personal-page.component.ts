@@ -11,6 +11,7 @@ import { InfluencerModel } from '../../models/influencer-model';
 import { UserService } from '../../services/user-service';
 import { ServerModel } from '../../models/server-model';
 import { GetServerRequest } from '../../request/get-server-request';
+import { GetInfoServiceRequest } from '../../request/get-info-service-request';
 
 @Component({
   selector: 'app-personal-page',
@@ -19,11 +20,11 @@ import { GetServerRequest } from '../../request/get-server-request';
 })
 export class PersonalPageComponent extends BasePageComponent implements OnInit {
 
-  constructor(private router: Router, 
-              private gameService: GameService, 
-              private cdr: ChangeDetectorRef, 
-              private influencerService: InfluencerService, 
-              userService: UserService) {
+  constructor(private router: Router,
+    private gameService: GameService,
+    private cdr: ChangeDetectorRef,
+    private influencerService: InfluencerService,
+    userService: UserService) {
     super();
   }
 
@@ -41,6 +42,8 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   influencerModel: InfluencerModel | undefined;
   serverModels: Array<ServerModel> | undefined;
   firstSeverModel: ServerModel | undefined;
+  serviceGetInfoModel: ServiceModel | undefined;
+
   onNavPersonalPage() {
     this.router.navigateByUrl(UrlDefine.PersonalPage);
   }
@@ -49,7 +52,7 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   }
 
   onGetServices() {
-    this.isSetLoading();
+    // this.isSetLoading();
     this.serviceModels = new Array<ServiceModel>();
     var request: BaseRequest = {
       pageIndex: 1,
@@ -60,20 +63,20 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
         if (res && res.code == 1) {
           this.serviceModels = res.data;
           this.serviceModels?.splice(0, 0, this.serviceSelected)
-          this.unSetLoading();
+          // this.unSetLoading();
           this.cdr.detectChanges();
         }
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });
   }
 
   onGetInfoInfluencer() {
-    this.isSetLoading();
+    // this.isSetLoading();
     let request: GetInfluencerByScoinIdRequest = {
       serviceId: 0
     };
@@ -82,21 +85,20 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
         if (res) {
           if (res.status) {
             this.influencerModel = res.data[0];
-            this.unSetLoading();
+            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         }
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });
   }
-
-  onGetServer(){
-    this.isSetLoading(); 
+  onGetServer() {
+    // this.isSetLoading();
     this.serverModels = new Array<ServerModel>();
     let request: GetServerRequest = {
       serviceId: this.serviceSelected?.serviceId ?? 0
@@ -109,24 +111,34 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
           }
         }
 
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading();
+        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });
     this.firstSeverModel = this.serverModels[0];
   }
-
-  onCopyLinkPathClipboar(){
+  onChangeServiceSelected(event: any) {
+    debugger;
+    if (event && event.target && event.target.value) {
+      this.onGetInfoService(event.target.value);
+    }
+  }
+  onGetInfoService(serviceId: number) {
+    debugger;
+    this.serviceGetInfoModel = this.serviceModels?.find(item => item.serviceId == serviceId);
+    this.cdr.detectChanges();
+  }
+  onCopyLinkPathClipboar() {
 
   }
 
-  onCopyLinkPathReferenName(){
-    
+  onCopyLinkPathReferenName() {
+
   }
 
 }

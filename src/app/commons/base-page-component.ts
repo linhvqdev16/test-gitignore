@@ -36,6 +36,8 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.localStorageService?.setToken(data.token ?? '');
                 this.localStorageService?.setScoinCode(params['code']);
                 this.localStorageService?.setUserInfo(data.userInfo);
+
+                window.close();
               }
             }
           },

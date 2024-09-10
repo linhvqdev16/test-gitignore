@@ -1,6 +1,6 @@
 export const environment = {
     production: true, 
-    apiUrl: 'https://localhost:5001', 
+    apiUrl: 'https://s.qdht.vn/inf', 
     authTokenKey: '', 
     client_id: "6cdd54dc21aa2eff51f72f1fa658a5d1",
     client_secret: "efeaa5b1da053015a58ebfcb13081e86",

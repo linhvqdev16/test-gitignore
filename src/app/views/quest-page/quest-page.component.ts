@@ -6,16 +6,11 @@ import { MissionService } from '../../services/mission-service';
 import { BasePageComponent } from '../../commons/base-page-component';
 import { Subject, takeUntil } from 'rxjs';
 import { GetListMissionRequest } from '../../request/get-list-mission-request';
-import { error } from 'console';
-import { SpinnerPageComponent } from '../defaults/spinner/spinner-page/spinner-page.component';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { GameService } from '../../services/game-service';
 import { BaseRequest } from '../../request/base-request';
 import { QuestService } from '../../services/quest-service';
 import { GetQuestByMissionRequest } from '../../request/get-quest-by-mission-request';
 import { BaseModelResponse } from '../../response/base-response';
-import { SampleComponent } from '../sample/sample.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quest-page',
@@ -47,7 +42,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
     this.onGetQuests();
   }
   onGetServices() {
-    this.isSetLoading();
+    // this.isSetLoading();
     let initialService: ServiceModel = {
       id: 0,
       serviceId: 0,
@@ -66,20 +61,20 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.serviceGames = result.data;
               this.serviceGames?.splice(0, 0, initialService);
             }
-            this.unSetLoading();
+            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
           console.log(error);
-          this.unSetLoading();
+          // this.unSetLoading();
           this.cdr.detectChanges();
         }
       }
     )
   }
   onGetMissions() {
-    this.isSetLoading();
+    // this.isSetLoading();
     if (this.getListMissionRequest == undefined) {
       this.getListMissionRequest = {
         pageIndex: this.pageIndex,
@@ -98,13 +93,13 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.missions = data.data;
               this.totalRecord = data.totalRecord;
             }
-            this.unSetLoading();
+            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
           console.log(error);
-          this.unSetLoading();
+          // this.unSetLoading();
           this.cdr.detectChanges();
         }
       }
@@ -112,7 +107,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
   }
   getQuestByMissionRequest: GetQuestByMissionRequest | undefined;
   onGetQuests() {
-    this.isSetLoading();
+    // this.isSetLoading();
     this.quests = new Array<QuestModel>();
     if (this.getQuestByMissionRequest == undefined) {
       this.getQuestByMissionRequest = {
@@ -128,12 +123,12 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.quests = data.data;
               this.getNumberTable((data.totalRecord ?? 0) % 3 == 1 ? Math.floor((data.totalRecord ?? 0) / 3) + 1 : (data.totalRecord ?? 0) / 3);
             }
-            this.unSetLoading();
+            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
-          this.unSetLoading();
+          // this.unSetLoading();
           this.cdr.detectChanges();
           console.log(error);
         }

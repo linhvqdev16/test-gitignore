@@ -47,7 +47,7 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
 
 
   onGetServiceList() {
-    this.isSetLoading();
+    // this.isSetLoading();
     this.serviceList = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
       pageIndex: this.pageIndex,
@@ -58,14 +58,14 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
         if (result) {
           if (result.code == 1) {
             this.serviceList = result.data;
-            this.unSetLoading();
+            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         }
       },
       error: (error) => {
         console.log(error);
-        this.unSetLoading(); 
+        // this.unSetLoading(); 
         this.cdr.detectChanges();
       }
     });
