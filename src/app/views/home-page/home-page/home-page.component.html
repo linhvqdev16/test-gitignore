@@ -1,12 +1,12 @@
 <div>
-    <div class="main-banner ">
+    <div class="main-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
         <div class="container zoom">
             <h1 class="text-main text-center" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500"
                 data-aos-delay="0"><img src="./images/text-influencer.png" class="img-fluid" alt="" /></h1>
             <p class="text-center text-des" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="500"
                 data-aos-delay="0">Influencer là những người ảnh hưởng, hoạt động trên nhiều nền tảng khác nhau và tích
                 cực hỗ trợ quảng bá trò chơi. Khám phá các cơ hội tăng trưởng mới thông qua quan hệ đối tác với
-                Influencer Affiliate</p>
+                Influencer Affiliate test</p>
             <div class="text-center pulse">
                 <a class="btn-xemthem" title="Xem thêm" (click)="onNavRegister()"> 
                     Xem thêm
@@ -80,7 +80,7 @@
     </div>
     <div class="cta">
         <div class="container">
-            <div class="game" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">
+            <div class="game" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100" [ngStyle]="{'background-image': 'url(./images/bg-cta-game.png)'}">
                 <div class="row align-items-center">
                     <div class="col-lg-4 offset-lg-1 text-end pe-4">
                         <img src="./images/thumb-cta-game.png" class="img-fluid rounded-4" width="360" alt="" />
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="quest" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="200">
+            <div class="quest" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="200" [ngStyle]="{'background-image': 'url(./images/bg-cta-quest.png)'}">
                 <div class="row align-items-center">
                     <div class="col-lg-6 offset-lg-1 text-end pe-4">
                         <h4>Danh sách NHIỆM VỤ</h4>

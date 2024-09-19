@@ -1,0 +1,150 @@
+<div class="bg-distribute">
+    <div class="distribute-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước để
+                theo dõi Influencer</h2>
+            <div class="row">
+                <div class="step step-01 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="0">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 1
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Chọn 1 game đang chơi
+                    </div>
+                </div>
+                <div class="step step-02 col-lg-6 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="50">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 2
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Đăng ký để trở thành Supporter
+                    </div>
+                </div>
+                <div class="step step-03 col-lg-3 zoom" data-aos="zoom-in" data-aos-easing="linear"
+                    data-aos-duration="500" data-aos-delay="100">
+                    <div class="btn-step">
+                        <a href="#" title="">
+                            Bước 3
+                        </a>
+                    </div>
+                    <div class="description-step">
+                        Nhận mã của Influecner để tiến hành theo dõi hoặc thao tác theo dõi trực tiếp trên website
+                    </div>
+                </div>
+            </div>
+            <p class="note" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">*
+                Đang nhập bằng tài khoản Scoin để tham gia</p>
+        </div>
+    </div>
+</div>
+<div class="games" *ngIf="influencerModels && influencerModels.length > 0">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end py-5">
+            <h2 class="title">Influencer</h2>
+            <div class="sub-title">
+                <div class="py-2">
+                    <input type="text" class="form-control" id="referenceName" placeholder="Nhập mã giới thiệu"
+                        name="referenceName">
+                </div>
+            </div>
+            <div class="sub-title">
+                <select class="form-select form-bottom">
+                    <option>Tất cả game</option>
+                    <option *ngFor="let item of serviceGames" [value]="item.serviceId">
+                        {{item.serviceName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                @for(item of influencerModels; track item ){
+                <mat-card class="mat-card"
+                    [ngStyle]="{'background-color': (item.id == influencerModelSelected?.id) ? 'rgb(232, 232, 245)' : '#ffffff'}"
+                    (click)="onSetInfluencer(item)">
+                    <div class="container">
+                        <div class="row card-inf">
+                            <div class="col-lg-5 text-center">
+                                <mat-card-title>{{item.nickName ?? "Biệt danh"}}</mat-card-title>
+                                <br />
+                                <mat-card-title>{{item.serverId ?? "Server"}}</mat-card-title>
+                            </div>
+                            <div class="col-lg-5 text-center">
+                                <mat-card-title>{{item.roleName ?? "Tên nhân vật"}}</mat-card-title>
+                                <br />
+                                <mat-card-title>{{item.referenceName ?? "Mã giới thiệu"}}</mat-card-title>
+                            </div>
+                            <mat-card-actions>
+                                @if(item.userStatus == -1){
+                                <div class="py-2">
+                                    <input type="button" class="form-control button-follow" value="Theo dõi"
+                                        (click)="onSubmitSupport()">
+                                </div>
+                                }
+                                @else {
+                                <div class="py-2">
+                                    <input type="button" class="form-control button-unfollow" value="Hủy theo dõi"
+                                        (click)="onUnSupport()">
+                                </div>
+                                }
+                            </mat-card-actions>
+                        </div>
+                    </div>
+                </mat-card>
+                }
+            </div>
+            <div class="col-lg-5">
+                <mat-card class="mat-card">
+                    <div class="container">
+                        <h4>Tên nhân vật: {{influencerModelSelected?.roleName ?? ""}}</h4>
+                        <div class="copy py-2">
+                            <span class="pe-0">Link phân phối: {{influencerModelSelected?.linkPath ?? ""}}</span>
+                            <a class="ps-2">
+                                <img src="images/icon-copy.png" alt="" class="img-fluid" />
+                            </a>
+                        </div>
+                        <div class="image text-center div-content">
+                            <img src="./images/featured-02.png" class="img-fluid-height rounded-4" alt="" />
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5">
+                                <div class="py-2">
+                                    <input type="text" class="form-control" id="referenceName"
+                                        placeholder="Nhập mã giới thiệu" name="referenceName" [readOnly]="true"
+                                        [value]="influencerModelSelected?.referenceName ">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                @if(influencerModelSelected?.userStatus == -1){
+                                <div class="py-2">
+                                    <input type="button" class="form-control button-follow" value="Theo dõi"
+                                        (click)="onSubmitSupport()">
+                                </div>
+                                }
+                                @else {
+                                <div class="py-2">
+                                    <input type="button" class="form-control button-unfollow" value="Hủy theo dõi"
+                                        (click)="onUnSupport()">
+                                </div>
+                                }
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="py-2">
+                                    <input type="button" class="form-control" value="Chi tiết">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

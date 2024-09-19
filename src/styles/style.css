@@ -170,7 +170,7 @@ a {
 	color: #476FF3;
 }
 .main-banner {
-	background-image: url(../images/banner-bg.png);
+	/* background-image: url(../images/banner-bg.png); */
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -258,7 +258,7 @@ a {
 	position: relative;
 }
 .cta .game {
-	background-image: url("../images/bg-cta-game.png");
+	/* background-image: url("../images/bg-cta-game.png"); */
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -275,7 +275,7 @@ a {
 	transition: .3s ease-in-out;
 }
 .cta .quest {
-	background-image: url("../images/bg-cta-quest.png");
+	/* background-image: url("../images/bg-cta-quest.png"); */
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -455,7 +455,7 @@ a {
 	overflow: auto;
 }
 .distribute-banner {
-	background-image: url("../images/bg-banner-distribute.png");
+	/* background-image: url("../images/bg-banner-distribute.png"); */
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -470,6 +470,7 @@ a {
 	font-size: 46px;
 	font-weight: bold;
 	padding: 32px 0;
+	font-family: 'Montserrat', sans-serif;
 }
 .distribute-banner .step {
 	font-size: 16px;
@@ -507,6 +508,7 @@ a {
 	font-size: 65px;
 	color: #353232;
 	font-weight: bold;
+	font-family: 'Montserrat', sans-serif;
 }
 .games .sub-title {
 	font-size: 16px;
@@ -627,7 +629,7 @@ a {
 	overflow: auto;
 }
 .affiliater-banner {
-	background-image: url("../images/bg-banner-distribute.png");
+	/* background-image: url("../images/bg-banner-distribute.png"); */
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -832,7 +834,7 @@ a {
 	overflow: auto;
 }
 .profile-banner {
-	background-image: url("../images/bg-banner-distribute.png");
+	/* background-image: url("../images/bg-banner-distribute.png"); */
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1296,4 +1298,10 @@ a {
 		-webkit-transform: scale(0.95);
 		opacity: 1;
 	}
+}
+.style-snackbar{
+	text-align: center;
+}
+.text-transform-input{
+	text-transform: uppercase;
 }

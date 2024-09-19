@@ -10,42 +10,44 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" (click)="ngHome()">
+                        <button class="nav-link" (click)="ngHome()">
                             Trang chủ
-                        </a>
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="onNavListGame()">
+                        <button class="nav-link" (click)="onNavListGame()">
                             Danh sách game
-                        </a>
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="ngQuest()">
+                        <button class="nav-link" (click)="ngQuest()">
                             Danh sách nhiệm vụ
-                        </a>
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="onNavPersonalPage()">
+                        <button class="nav-link" (click)="onNavPersonalPage()">
                             Trang cá nhân
-                        </a>
+                        </button>
                     </li>
-                    @if(this.isLoggin === false){
+                    @if(this.isLogin == false){
                     <li class="nav-item btn-login">
-                        <a class="nav-link d-flex align-items-center" (click)="onLogin()" data-bs-toggle="modal">
+                        <button class="nav-link d-flex align-items-center" (click)="onLogin()" data-bs-toggle="modal">
                             <img src="images/icon-user.png" class="img-fluid" alt="" />
-                            <span class="ps-2">Đăng nhập</span>
-                        </a>
+                            <span class="ps-2">
+                                Đăng nhập
+                            </span>
+                        </button>
                     </li>
                     }
                     @else {
                     <li class="nav-item d-flex align-items-center">
                         <span class="text-info">[ Xin chào: {{userModel?.accountName ?? 'Ngọc Trinh'}} - </span>
-                        <a class="nav-link" href="#" title="Thoát">
+                        <button class="nav-link" href="#" title="Thoát">
                             <span class="text-info" (click)="onLogout()">Thoát ]</span>
-                        </a>
+                        </button>
                     </li>}
                 </ul>
             </div>
         </div>
     </nav>
-</div>  
+</div>

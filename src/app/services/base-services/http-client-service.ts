@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpParamsOptions } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { json } from "stream/consumers";
-import { catchError, finalize, map, Observable, share } from "rxjs";
+import { catchError, finalize, map, Observable, share, tap } from "rxjs";
 import { Common } from "../../commons/common";
 import { error } from "console";
+import { LocalStorageSerice } from "../../core/local-storage/local-storeage-service";
 
 @Injectable({
     providedIn: 'root',
@@ -12,6 +13,9 @@ import { error } from "console";
     deps: [HttpClient]
 })
 export class HttpClientService {
+
+    localStorageSerice= inject(LocalStorageSerice);
+
     constructor(private http: HttpClient, private router: Router
     ) { }
     unableConnectToServer = {
@@ -32,6 +36,7 @@ export class HttpClientService {
     };
     private handleErrorObservable(obj: any) {
         let errObject;
+        console.log(obj.message);
         return Promise.resolve(errObject);
     }
     postJsonObservable(absolutePath: string, obj: any = {}): Observable<any> {
@@ -44,7 +49,7 @@ export class HttpClientService {
     }
     postJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -53,13 +58,31 @@ export class HttpClientService {
             .pipe(map((response) => {
                 return response;
             }), catchError((error) => {
+                console.log('error: ' + error.message);
                 const errorObj = { statusCode: error.status, errorMessage: error.message, dateTime: new Date() }
                 return this.handleErrorObservable(error);
             }));
     }
+    getJsonObservable(absolutePath: string, obj: any): any {
+        const url: string = Common.GetUrl(absolutePath);
+        const header: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        });
+        const httpParams: HttpParamsOptions = { fromObject: obj } as HttpParamsOptions;
+        return this.http.get(
+            url
+            , { headers: header, params: new HttpParams(httpParams) }
+        ).subscribe({
+            next: (data: any) => {
+              console.log(data);
+              return data;
+            }, error: (err) => console.log(err)
+          });
+    }
     getJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -71,14 +94,11 @@ export class HttpClientService {
         ).pipe(map((response) => {
             console.log(response);
             return response;
-        }), catchError((err) => {
-            const errorObj = { statusCode: err.status, errorMessage: err.message, datetime: new Date() }
-            return this.handleErrorObservable(errorObj);
         }));
     }
     deleteJsonAuthenObservale(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -89,7 +109,7 @@ export class HttpClientService {
     }
     putJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -100,7 +120,7 @@ export class HttpClientService {
     }
     patchJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -111,7 +131,7 @@ export class HttpClientService {
     }
     downladBlobAuthenObservable(absolutePath: string, obj: any): Observable<any> {
         const url: string = Common.GetUrl(absolutePath);
-        const token: string = Common.GetAuthenToken();
+        const token: string = this.localStorageSerice.getToken();
         const header: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

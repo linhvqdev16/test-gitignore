@@ -21,7 +21,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
 
   destroy$: Subject<boolean> = new Subject();
   serviceGames: Array<ServiceModel> | undefined;
-  serviceModelSelected: any;
+  serviceIdSelected: number | undefined;
   missions: Array<MissionModel> | undefined;
   quests: Array<QuestModel> | undefined;
   totalQuest: number | undefined;
@@ -42,12 +42,6 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
     this.onGetQuests();
   }
   onGetServices() {
-    // this.isSetLoading();
-    let initialService: ServiceModel = {
-      id: 0,
-      serviceId: 0,
-      serviceName: 'Tất cả gane'
-    };
     this.serviceGames = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
       pageIndex: 1,
@@ -59,30 +53,27 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           if (result) {
             if (result.code === 1) {
               this.serviceGames = result.data;
-              this.serviceGames?.splice(0, 0, initialService);
             }
-            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
           console.log(error);
-          // this.unSetLoading();
+          this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
       }
     )
   }
   onGetMissions() {
-    // this.isSetLoading();
     if (this.getListMissionRequest == undefined) {
       this.getListMissionRequest = {
         pageIndex: this.pageIndex,
         pageSize: this.pageSize,
       }
     }
-    if (this.serviceModelSelected != undefined) {
-      this.getListMissionRequest.serviceId = this.serviceModelSelected.serviceId;
+    if (this.serviceIdSelected != undefined) {
+      this.getListMissionRequest.serviceId = this.serviceIdSelected;
     }
     this.missionService.Get(this.getListMissionRequest).subscribe(
       {
@@ -93,21 +84,20 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.missions = data.data;
               this.totalRecord = data.totalRecord;
             }
-            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
           console.log(error);
-          // this.unSetLoading();
+          this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
       }
     )
   }
   getQuestByMissionRequest: GetQuestByMissionRequest | undefined;
+
   onGetQuests() {
-    // this.isSetLoading();
     this.quests = new Array<QuestModel>();
     if (this.getQuestByMissionRequest == undefined) {
       this.getQuestByMissionRequest = {
@@ -123,13 +113,12 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
               this.quests = data.data;
               this.getNumberTable((data.totalRecord ?? 0) % 3 == 1 ? Math.floor((data.totalRecord ?? 0) / 3) + 1 : (data.totalRecord ?? 0) / 3);
             }
-            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         },
         error: (error) => {
-          // this.unSetLoading();
           this.cdr.detectChanges();
+          this.openSnackBar(error.message, '');
           console.log(error);
         }
       }
@@ -157,8 +146,9 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
       this.arrayTable.push(i);
     }
   }
-  changeSelectService() {
+  changeSelectService(event: any) {
     this.pageIndex = 1;
+    this.serviceIdSelected = event.target.value;
     this.onGetMissions();
   }
   onChangePage() { }

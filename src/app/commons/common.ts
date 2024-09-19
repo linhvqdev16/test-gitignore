@@ -1,5 +1,7 @@
+import { inject } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 import { LocalStorageKey } from "../core/local-storage/local-storage-key";
+import { LocalStorageSerice } from "../core/local-storage/local-storeage-service";
 
 declare var $:any; 
 
@@ -7,13 +9,10 @@ export class Common{
 
     private static LocalStorageAuthenKey = environment.authTokenKey;
 
+
     public static GetUrl(absolutePath: string): string{
         return `${environment.apiUrl}${absolutePath}`;
     }
-    public static GetAuthenToken(): string {
-        return localStorage.getItem(LocalStorageKey.TOKEN) || '';
-    }
-
     public static GetClienId(){
         return `${environment.client_id}`; 
     }

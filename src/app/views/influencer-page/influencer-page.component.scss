@@ -1,0 +1,32 @@
+.card-inf {
+    border: 2px solid red($color: #000000);
+    border-radius: 25px;
+}
+
+::ng-deep .mat-card {
+    border: 55px !important;
+    border-radius: 15px !important;
+    border: #000 !important;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.div-content{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.games{
+    margin-bottom: 50px;
+}
+.button-follow{
+    background-color: blue;
+    color: white;
+}
+.button-unfollow{
+    background-color: red;
+    color: white;
+}
+.form-bottom{
+    margin-bottom: 8px;
+}

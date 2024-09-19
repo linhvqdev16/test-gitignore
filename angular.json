@@ -37,6 +37,7 @@
               "src/images"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles/style.css",
               "node_modules/aos/dist/aos.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -51,7 +52,8 @@
               "node_modules/aos/dist/aos.js",
               "src/js/res-1.js"
             ],
-            "server": "src/main.server.ts"
+            "server": "src/main.server.ts",
+            "prerender": true
           },
           "configurations": {
             "production": {
@@ -70,7 +72,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "200mb",
-                  "maximumError": "4mb"
+                  "maximumError": "400mb"
                 }
               ],
               "outputHashing": "all"
@@ -126,9 +128,11 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/images"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []

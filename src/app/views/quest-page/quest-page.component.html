@@ -1,7 +1,7 @@
 <app-spinner-page></app-spinner-page>
 <div>
     <div class="bg-distribute">
-        <div class="distribute-banner">
+        <div class="distribute-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
             <div class="container">
                 <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước
                     nhận
@@ -55,8 +55,9 @@
                 <div class="d-flex justify-content-between align-items-end py-5">
                     <h2 class="title">Quest list</h2>
                     <div class="sub-title">
-                        <select class="form-select" ngModel="serviceModelSelected" (change)="changeSelectService()">
-                            <option *ngFor="let item of serviceGames" [value]="item">
+                        <select class="form-select" (change)="changeSelectService($event)">
+                            <option>Tất cả game</option>
+                            <option *ngFor="let item of serviceGames" [value]="item.serviceId">
                                 {{item.serviceName}}
                             </option>
                         </select>
@@ -75,7 +76,7 @@
                                 <p class="date">Ngày hết hạn <strong>{{item.endDate | date: 'dd/MM/yyyy'}}</strong></p>
                                 <div class="btn-point">
                                     <a class="btn" title="">
-                                        Tổng điểm thưởng: <strong>{{item.earnPoint |number}} Point</strong>
+                                        Tổng điểm thưởng: <strong>{{(item.earnPoint |number)?.toString()?.replaceAll(",", ".") }} Point</strong>
                                     </a>
                                 </div>
                             </div>
@@ -118,7 +119,7 @@
                                     <tr>
                                         <td>{{item.eventName}}</td>
                                         <td>{{item.name}}</td>
-                                        <td><strong>{{item.questValue | number}} Point</strong></td>
+                                        <td><strong>{{(item.questValue |number)?.toString()?.replaceAll(",", ".") }} Point</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

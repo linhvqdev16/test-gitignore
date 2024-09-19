@@ -5,4 +5,5 @@ export class UrlDefine{
     public static PersonalPage = "personal-page"; 
     public static RegisterGamerPage = "register-gamer-page";
     public static ReportCommonPage = "report-common";
+    public static InfluencerPage = "influencer-page";
 }

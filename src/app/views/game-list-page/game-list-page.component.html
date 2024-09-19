@@ -1,5 +1,5 @@
 <div class="bg-distribute">
-    <div class="distribute-banner">
+    <div class="distribute-banner" [ngStyle]="{'background-image': 'url(./images/banner-bg.png)'}">
         <div class="container">
             <h2 data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">Các bước phân
                 phối bản cài</h2>
@@ -61,44 +61,44 @@
                     @for (item of serviceList; track item) {
                     <div ngxSlickItem class="slide">
                         <div class="item-game text-center mx-auto brightness">
-                            <a href="register-aff.html" title="">
+                            <a (click)="onNavInfluencerPage(item)" title="">
                                 <img src="{{item.bannerUrl}}" alt="" width="580" class="img-fluid" />
                             </a>
                             <div class="game d-flex justify-content-start align-items-center py-3">
                                 <div class="icon-game">
-                                    <a href="register-aff.html">
+                                    <a (click)="onNavInfluencerPage(item)">
                                         <img src="{{item.imageUrl}}" alt="" width="143" class="img-fluid" />
                                     </a>
                                 </div>
                                 <div class="title-game">
                                     <h2>
-                                        <a href="register-aff.html" title="">
+                                        <a (click)="onNavInfluencerPage(item)" title="">
                                             {{item.serviceName}}
                                         </a>
                                     </h2>
                                     <div class="tag">
-                                        <a href="#" title="">
+                                        <a title="">
                                             #Mobile
                                         </a>
                                         ,
-                                        <a href="#" title="">
+                                        <a title="">
                                             #PRG
                                         </a>
                                         ,
-                                        <a href="#" title="">
+                                        <a title="">
                                             #Chienthuat
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="compatible-os">
-                                <a href="#" title="">
+                                <a title="">
                                     PC
                                 </a>
-                                <a href="#" title="">
+                                <a title="">
                                     Android
                                 </a>
-                                <a href="#" title="">
+                                <a title="">
                                     IOS
                                 </a>
                             </div>

@@ -12,6 +12,7 @@ import { UserService } from '../../services/user-service';
 import { ServerModel } from '../../models/server-model';
 import { GetServerRequest } from '../../request/get-server-request';
 import { GetInfoServiceRequest } from '../../request/get-info-service-request';
+import { CommunicateService } from '../../services/base-services/communicate-service';
 
 @Component({
   selector: 'app-personal-page',
@@ -24,7 +25,8 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
     private gameService: GameService,
     private cdr: ChangeDetectorRef,
     private influencerService: InfluencerService,
-    userService: UserService) {
+    userService: UserService,
+    private communicateService: CommunicateService) {
     super();
   }
 
@@ -35,10 +37,7 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   }
 
   serviceModels: Array<ServiceModel> | undefined;
-  serviceSelected: ServiceModel = {
-    id: 0,
-    serviceName: 'Chọn game'
-  };
+  serviceSelected: ServiceModel | undefined;
   influencerModel: InfluencerModel | undefined;
   serverModels: Array<ServerModel> | undefined;
   firstSeverModel: ServerModel | undefined;
@@ -52,7 +51,7 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   }
 
   onGetServices() {
-    // this.isSetLoading();
+
     this.serviceModels = new Array<ServiceModel>();
     var request: BaseRequest = {
       pageIndex: 1,
@@ -62,21 +61,17 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
       next: (res) => {
         if (res && res.code == 1) {
           this.serviceModels = res.data;
-          this.serviceModels?.splice(0, 0, this.serviceSelected)
-          // this.unSetLoading();
           this.cdr.detectChanges();
         }
       },
       error: (error) => {
         console.log(error);
-        // this.unSetLoading();
         this.cdr.detectChanges();
       }
     });
   }
 
   onGetInfoInfluencer() {
-    // this.isSetLoading();
     let request: GetInfluencerByScoinIdRequest = {
       serviceId: 0
     };
@@ -85,20 +80,19 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
         if (res) {
           if (res.status) {
             this.influencerModel = res.data[0];
-            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         }
       },
       error: (error) => {
         console.log(error);
-        // this.unSetLoading();
+
         this.cdr.detectChanges();
       }
     });
   }
   onGetServer() {
-    // this.isSetLoading();
+
     this.serverModels = new Array<ServerModel>();
     let request: GetServerRequest = {
       serviceId: this.serviceSelected?.serviceId ?? 0
@@ -111,34 +105,38 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
           }
         }
 
-        // this.unSetLoading();
+
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.log(error);
-        // this.unSetLoading();
+
         this.cdr.detectChanges();
       }
     });
     this.firstSeverModel = this.serverModels[0];
   }
   onChangeServiceSelected(event: any) {
-    debugger;
+
     if (event && event.target && event.target.value) {
       this.onGetInfoService(event.target.value);
     }
   }
   onGetInfoService(serviceId: number) {
-    debugger;
+
     this.serviceGetInfoModel = this.serviceModels?.find(item => item.serviceId == serviceId);
     this.cdr.detectChanges();
   }
   onCopyLinkPathClipboar() {
 
   }
-
   onCopyLinkPathReferenName() {
 
+  }
+
+  onNavToRegisterPage(): void {
+    this.communicateService.setAction(1); 
+    this.router.navigateByUrl(UrlDefine.RegisterGamerPage);
   }
 
 }

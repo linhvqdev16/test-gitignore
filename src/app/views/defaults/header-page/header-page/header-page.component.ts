@@ -16,23 +16,12 @@ import { UserModel } from '../../../../models/user-model';
 })
 export class HeaderPageComponent extends BasePageComponent implements OnInit {
 
-  private returlUrl: string | undefined;
-
-
-  constructor(private router: Router, activatedRoute: ActivatedRoute, localStorageService: LocalStorageSerice, private cdr: ChangeDetectorRef) 
+  constructor(private router: Router, activatedRoute: ActivatedRoute, localStorageService: LocalStorageSerice, cdr: ChangeDetectorRef) 
   {
     super();
   }
 
-  isLoggin: boolean = false; 
-  userModel: UserModel | undefined; 
-
   override ngOnInit(): void {
-    if(this.localStorageService.getToken() && this.localStorageService.getToken().length > 0){
-      this.isLoggin = true;
-      this.userModel = this.localStorageService.getUserInfo();
-      this.cdr.detectChanges();
-    }
   }
   ngQuest(): void {
     this.router?.navigateByUrl(UrlDefine.QuestPage);
@@ -57,10 +46,5 @@ export class HeaderPageComponent extends BasePageComponent implements OnInit {
     loginUrl = loginUrl.replace('redirecUrl', originUrl);
     loginUrl = loginUrl.replace('agencyValue', '0');
     window.open(loginUrl);
-  }
-  onLogout(){
-    this.isLoggin = false;
-    this.localStorageService.clean();
-    this.cdr.detectChanges();
   }
 }

@@ -19,26 +19,26 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         this.spinner.show();
         return next.handle(req).pipe(
             catchError((error) => {
+                console.log('Global error: ' + error.message);
                 if (error instanceof HttpErrorResponse && !req.url.includes(UrlAPIDefine.GetAcessToken) && (error.status == 401 || error.status == 403)) {
                     return this.handle401Error(req, next);
                 }
                 return throwError(() => error)
-            }), 
+            }),
             finalize(() => this.spinner.hide())
         )
     }
 
     private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-        if (!this.isRefreshing) {
-            // this.isRefreshing = true;
-            // let loginUrl: string = "";
-            // loginUrl = Common.GetAuthorUrl();
-            // loginUrl = loginUrl.replace('clientValue', Common.GetClienId());
-            // let originUrl: string = encodeURI(window.location.href);
-            // loginUrl = loginUrl.replace('redirecUrl', originUrl);
-            // loginUrl = loginUrl.replace('agencyValue', '0');
-            // window.open(loginUrl);
-        }
+        // this.isRefreshing = true;
+        // let loginUrl: string = "";
+        // loginUrl = Common.GetAuthorUrl();
+        // loginUrl = loginUrl.replace('clientValue', Common.GetClienId());
+        // let originUrl: string = encodeURI(window.location.href);
+        // loginUrl = loginUrl.replace('redirecUrl', originUrl);
+        // loginUrl = loginUrl.replace('agencyValue', '0');
+        // window.open(loginUrl);
+        this.localStorageService.clean();
         return next.handle(request);
     }
 }

@@ -1,6 +1,6 @@
 <!-- <app-spinner-page></app-spinner-page> -->
 <div class="bg-profile">
-    <div class="profile-banner">
+    <div class="profile-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
     </div>
     <div class="profile-content">
         <div class="container">
@@ -24,10 +24,15 @@
                             <h2>Thông tin tài khoản</h2>
                             <div class="info">
                                 <p class="mb-0"><span class="name">{{influencerModel?.nickName}}</span><span
-                                        class="mail ps-2">(ngoctrinh89&364gmail.com)</span></p>
+                                        class="mail ps-2">({{influencerModel?.scoinName}})</span></p>
                             </div>
-                            <p class="small">(*Chờ phê duyệt/ Đã phê duyệt)</p>
-                            <div class="social text-end">
+                            @if(influencerModel?.status == 0){
+                                <p class="small">(* Chờ phê duyệt)</p>
+                            }
+                            @else {
+                                <p class="small">(* Đã phê duyệt)</p>
+                            }
+                            <div class="social text-end social-margin">
                                 <a class="text-decoration-none" href="{{influencerModel?.liveGChannel}}">
                                     <img src="images/icon-liveg.png" alt="" class="img-fluid img-fluid-custom">
                                 </a>
@@ -38,21 +43,21 @@
                                     <img src="images/icon-tiktok-xl.png" alt="" class="img-fluid img-fluid-custom">
                                 </a>
                             </div>
-                            <div class="copy py-2">
+                            <div class="copy padding-div">
                                 <span class="pe-0">Link phân phối: {{influencerModel?.linkPath}}</span>
                                 <a class="ps-2" (click)="onCopyLinkPathClipboar()">
                                     <img src="images/icon-copy.png" alt="" class="img-fluid" />
                                 </a>
                             </div>
-                            <div class="copy py-2">
+                            <div class="copy padding-div">
                                 <span class="pe-0">Mã giới thiệu: {{influencerModel?.referenceName}}</span>
                                 <a class="ps-2" (click)="onCopyLinkPathReferenName()">
                                     <img src="images/icon-copy.png" alt="" class="img-fluid" />
                                 </a>
                             </div>
-                            <div class="copy py-2">
+                            <div class="copy padding-div">
                                 <span class="pe-2">Lời giới thiệu: {{influencerModel?.slogan}}</span>
-                                <a class="btn-edit" title="Chỉnh sửa">
+                                <a class="btn-edit" title="Chỉnh sửa" (click)="onNavToRegisterPage()">
                                     Chỉnh sửa
                                 </a>
                             </div>
@@ -68,7 +73,8 @@
                                     Tên game
                                 </div>
                                 <div class="col-lg-9 text-start py-2">
-                                    <select class="form-select" ngModel="serviceSelected" (change)="onChangeServiceSelected($event)">
+                                    <select class="form-select"  (change)="onChangeServiceSelected($event)">
+                                        <option>Chọn game</option>
                                         @for(item of serviceModels; track item){
                                         <option value="{{item.serviceId}}">{{item.serviceName}}</option>
                                         }

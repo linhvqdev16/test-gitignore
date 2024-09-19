@@ -11,7 +11,7 @@ export class BaseListRespone{
     pageSize?: number; 
     totalRecord?: number; 
     code?: number; 
-    message?: number; 
+    message?: string; 
     data?: any[];
 }
 

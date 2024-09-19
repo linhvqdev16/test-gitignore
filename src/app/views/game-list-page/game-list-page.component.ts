@@ -1,12 +1,14 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import {  ChangeDetectorRef, Component, Inject, OnInit,  } from '@angular/core';
-import {  SlickCarouselModule } from 'ngx-slick-carousel';
+import { ChangeDetectorRef, Component, Inject, OnInit, } from '@angular/core';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ServiceModel } from '../../models/service-model';
 import { GameService } from '../../services/game-service';
 import { BaseRequest } from '../../request/base-request';
 import { BasePageComponent } from '../../commons/base-page-component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UrlDefine } from '../../commons/url-define';
+import { CommunicateService } from '../../services/base-services/communicate-service';
 
 @Component({
   selector: 'app-game-list-page',
@@ -19,7 +21,7 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
 
   serviceList: Array<ServiceModel> | undefined;
 
-  constructor(private gameService: GameService, private cdr: ChangeDetectorRef, private spinner: NgxSpinnerService) {
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef, private spinner: NgxSpinnerService, private router: Router, private communicateSerivce: CommunicateService) {
     super();
   }
   override ngOnInit(): void {
@@ -42,12 +44,14 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
           "centerPadding": '203px'
         },
       }
-    ]
+    ],
+    "customPaging": function (slick: any, i: any) {
+      return '<a>' + (i + 1) + '</a>';
+    }
   }
 
 
   onGetServiceList() {
-    // this.isSetLoading();
     this.serviceList = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
       pageIndex: this.pageIndex,
@@ -58,33 +62,32 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
         if (result) {
           if (result.code == 1) {
             this.serviceList = result.data;
-            // this.unSetLoading();
             this.cdr.detectChanges();
           }
         }
       },
       error: (error) => {
         console.log(error);
-        // this.unSetLoading(); 
+        this.openSnackBar(error.message ?? '', '');
         this.cdr.detectChanges();
       }
     });
   }
 
   slickInit() {
-    console.log('slick initialized');
   }
 
   breakpoint() {
-    console.log('breakpoint');
   }
 
   afterChange() {
-    console.log('afterChange');
   }
 
   beforeChange() {
-    console.log('beforeChange');
   }
 
+  onNavInfluencerPage(item: ServiceModel) {
+    this.communicateSerivce.setServiceId(item.serviceId ?? 1);
+    this.router.navigateByUrl(UrlDefine.InfluencerPage);
+  }
 }

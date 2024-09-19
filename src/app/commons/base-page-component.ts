@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, inject } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, inject, ChangeDetectorRef } from "@angular/core";
 import { SpinnerPageComponent } from "../views/defaults/spinner/spinner-page/spinner-page.component";
 import { Observable } from "rxjs";
 import { ActivatedRoute, Params, Router } from "@angular/router";
@@ -6,6 +6,8 @@ import { UserService } from "../services/user-service";
 import { LocalStorageSerice } from "../core/local-storage/local-storeage-service";
 import { GetAccessTokenRequest } from "../request/get-access-token-request";
 import { AuthenModel } from "../models/authen-model";
+import { UserModel } from "../models/user-model";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   template: ''
@@ -15,29 +17,36 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   userService = inject(UserService);
   localStorageService = inject(LocalStorageSerice);
   activatedRoute = inject(ActivatedRoute);
+  snackBar = inject(MatSnackBar);
+
+  isLogin: boolean = false;
+  userModel: UserModel | undefined;
 
   constructor() {
     this.initConfiguration();
+    if(this.localStorageService.getToken() && this.localStorageService.getToken().length > 0){
+      this.isLogin = true;
+      this.userModel = this.localStorageService.getUserInfo();
+    }
   }
 
   initConfiguration() {
     this.activatedRoute?.queryParams.subscribe((params: Params) => {
       if (params != undefined && params['code'] != undefined) {
-
         let accessTokenRequest: GetAccessTokenRequest = {
           code: params['code']
         };
         this.userService?.GetAccessToken(accessTokenRequest).subscribe({
           next: (res) => {
             if (res) {
+              console.log(res);
               if (res.status) {
                 var data: AuthenModel = res.data;
-                console.log(data);
                 this.localStorageService?.setToken(data.token ?? '');
-                this.localStorageService?.setScoinCode(params['code']);
                 this.localStorageService?.setUserInfo(data.userInfo);
-
-                window.close();
+                console.log('set is login');
+                this.isLogin = true;
+                this.userModel = data.userInfo;
               }
             }
           },
@@ -45,7 +54,6 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
             console.log(error);
           }
         });
-
       }
     });
   }
@@ -85,4 +93,16 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.spinnerPageComponent.ngShowSpinner(this.isLoading);
     }
   }
+  onLogout(){
+    this.isLogin = false;
+    this.localStorageService.clean();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ["style-snackbar"]
+    });
+  }
+
 }

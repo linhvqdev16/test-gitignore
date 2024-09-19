@@ -1,7 +1,6 @@
-<app-spinner-page></app-spinner-page>
 <div>
     <div class="bg-affiliater ">
-        <div class="affiliater-banner">
+        <div class="affiliater-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
         </div>
         <div class="form-register">
             <div class="frame">
@@ -12,113 +11,184 @@
                 </div>
                 <div class="card border-0" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500"
                     data-aos-delay="0">
-                    <div class="card-body py-4">
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Tên game <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <select class="form-select" (ngModel)="serviceSelected"
-                                    (change)="onChangeServiceModel($event)">
-                                    <option>Chọn game</option>
-                                    @for(item of serviceModels; track item){
-                                    <option value="{{item.serviceId}}">{{item.serviceName}}</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Server <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <select class="form-select" (ngModel)="serverSelected"
-                                    (change)="onChangeServerModel($event)">
-                                    <option>Chọn Server</option>
-                                    @for(item of serverModels; track item){
-                                    <option value="{{item.serverId}}">{{item.serverName}}</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Nhân vật <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <select class="form-select" (ngModel)="roleSelected">
-                                    <option>Chọn nhân vật</option>
-                                    @for(item of this.roleModels; track item){
-                                    <option value="{{item.roleId}}">{{item.roleName}}</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Biệt danh <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <input type="text" class="form-control" id="nickname" placeholder="Nhập biệt danh"
-                                    name="nickname">
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Mã giới thiệu <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <input type="text" class="form-control" id="code"
-                                    placeholder="Hệ thống tự sinh và là duy nhất" name="code" readonly>
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-2">
-                                <h4>Lời giới thiệu <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-2">
-                                <input type="text" class="form-control" id="about" placeholder="Giới hạn 60 ký tự"
-                                    name="about">
-                            </div>
-                            <div class="col-lg-3 offset-lg-1 py-3">
-                                <h4>Livestream <a style="color: red; font-weight: normal;">*</a></h4>
-                            </div>
-                            <div class="col-lg-7 py-3 text-start">
-                                <a class="text-decoration-none" href="#">
-                                    <img src="images/icon-liveg.png" alt=""
-                                        class="img-fluid img-fluid-custom zoom-50" />
-                                </a>
-                                <a class="text-decoration-none" href="#">
-                                    <img src="images/icon-ytb-xl.png" alt=""
-                                        class="img-fluid img-fluid-custom zoom-50" />
-                                </a>
-                                <a class="text-decoration-none" href="#">
-                                    <img src="images/icon-tiktok-xl.png" alt=""
-                                        class="img-fluid img-fluid-custom zoom-50" />
-                                </a>
-                                <p class="fw-bold pt-3"> <a style="color: red; font-weight: normal;">*</a> Yêu cầu tối thiếu 100 Subcriber/Follower</p>
-                                <p class="mb-0 fs-10">Yêu cầu cá nhân điền đầy đủ thông tin trong Hợp đồng.</p>
-                                <p class="mb-0 fs-10">Cá nhân hoàn toàn chịu trách nhiệm với các nội dung trong Hợp đồng
-                                </p>
-                                <div class="btn-xacthuc">
-                                    <a class="btn" href="#" title="">
-                                        Xác thực thông tin Hợp Đồng
-                                    </a>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="card-body py-4">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Tên game <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="policy">
-                                    Tôi đồng ý với các
-                                    <a class="fw-bold" href="#" title="Điều khoản">
-                                        điều khoản
+                                <div class="col-lg-7 py-2">
+                                    <select class="form-select"
+                                        (change)="onChangeServiceModel($event)"
+                                        [(ngModel)]="registerInfluencerRequest.serviceId"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [value]="0"
+                                        >
+                                        <option [value]="0">Chọn Game</option>
+                                        @for(item of serviceModels; track item){
+                                        <option value="{{item.serviceId}}">{{item.serviceName}}</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Server <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-2">
+                                    <select class="form-select"
+                                        (change)="onChangeServerModel($event)"
+                                        [(ngModel)]="registerInfluencerRequest.serverId"
+                                        [ngModelOptions]="{standalone: true}"
+                                        >
+                                        <option [value]="0">Chọn Server</option>
+                                        @for(item of serverModels; track item){
+                                        <option value="{{item.serverId}}">{{item.serverName}}</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Nhân vật <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-2">
+                                    <select class="form-select" [(ngModel)]="registerInfluencerRequest.roleId" [ngModelOptions]="{standalone: true}">
+                                        <option [value]="0">Chọn Nhân Vật</option>
+                                        @for(item of this.roleModels; track item){
+                                        <option value="{{item.roleId}}">{{item.roleName}}</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Biệt danh <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-2">
+                                    <input type="text" class="form-control" id="nickname" placeholder="Nhập biệt danh"
+                                        name="nickname" formControlName="nickname"
+                                        [(ngModel)]="registerInfluencerRequest.nickName"
+                                        [ngClass]="{ 'is-invalid': submitted && f['nickname'].errors}">
+                                </div>
+                                @if (submitted && f['nickname'].errors) {
+                                <div class="invalid_message">
+                                    @if (f['nickname'].errors['required']) {
+                                    <div>Bắt buộc nhập biệt danh</div>
+                                    }
+                                </div>
+                                }
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Mã giới thiệu <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-2">
+                                    <input type="text" class="form-control" id="referenceName"
+                                        placeholder="Nhập mã giới thiệu" name="referenceName"
+                                        formControlName="referenceName"
+                                        [ngClass]="{ 'is-invalid': submitted && f['referenceName'].errors}"
+                                        (input)="onGetInfluencerByCode($event)"
+                                        [(ngModel)]="registerInfluencerRequest.referenceName"
+                                        [readonly]="isReadonly"
+                                        >
+                                </div>
+                                @if (submitted && f['referenceName'].errors) {
+                                <div class="invalid_message">
+                                    @if (f['referenceName'].errors['required']) {
+                                    <div>Bắt buộc nhập mã giới thiệu</div>
+                                    }
+                                    @if (f['referenceName'].errors['pattern']) {
+                                        <div>Bắt buộc nhập đúng định dạng mã giới thiệu</div>
+                                        }
+                                </div>
+                                }
+                                @if (isExisInfluencerCode) {
+                                    <div class="invalid_message">
+                                       Mã giới thiệu đã tồn tại
+                                    </div>
+                                    }
+                                <div class="col-lg-3 offset-lg-1 py-2">
+                                    <h4>Lời giới thiệu <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-2">
+                                    <input type="text" class="form-control" id="slogan" placeholder="Giới hạn 60 ký tự"
+                                        name="slogan" formControlName="slogan"
+                                        [(ngModel)]="registerInfluencerRequest.slogan"
+                                        [ngClass]="{ 'is-invalid': submitted && f['slogan'].errors}">
+                                </div>
+                                @if (submitted && f['slogan'].errors) {
+                                <div class="invalid_message">
+                                    @if (f['slogan'].errors['required']) {
+                                    <div>Bắt buộc nhập lời giới thiệu</div>
+                                    }
+                                    @if (f['slogan'].errors['maxLength']) {
+                                    <div>Lời giới thiệu không được quá 60 kí tự</div>
+                                    }
+                                </div>
+                                }
+                                <div class="col-lg-3 offset-lg-1 py-3">
+                                    <h4>Livestream <a style="color: red; font-weight: normal;">*</a></h4>
+                                </div>
+                                <div class="col-lg-7 py-3 text-start">
+                                    <a class="text-decoration-none" href="#">
+                                        <img src="images/icon-liveg.png" alt=""             
+                                            class="img-fluid img-fluid-custom zoom-50" />
                                     </a>
-                                    và
-                                    <a class="fw-bold" href="#" title="chính sách">
-                                        chính sách
+                                    <a class="text-decoration-none" href="#">
+                                        <img src="images/icon-ytb-xl.png" alt=""
+                                            class="img-fluid img-fluid-custom zoom-50" />
                                     </a>
-                                    của VTC Mobile. </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="age">
-                                    Tôi xác nhận đủ từ 18 tuổi trở lên. </label>
-                            </div>
+                                    <a class="text-decoration-none" href="#">
+                                        <img src="images/icon-tiktok-xl.png" alt=""
+                                            class="img-fluid img-fluid-custom zoom-50" />
+                                    </a>
+                                    <p class="fw-bold pt-3"> <a style="color: red; font-weight: normal;">*</a> Yêu cầu
+                                        tối thiếu 100 Subcriber/Follower</p>
+                                    <p class="mb-0 fs-10">Yêu cầu cá nhân điền đầy đủ thông tin trong Hợp đồng.</p>
+                                    <p class="mb-0 fs-10">Cá nhân hoàn toàn chịu trách nhiệm với các nội dung trong Hợp
+                                        đồng
+                                    </p>
+                                    <div class="btn-xacthuc">
+                                        <a class="btn" href="#" title="">
+                                            Xác thực thông tin Hợp Đồng
+                                        </a>
+                                    </div>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="acceptTerms"
+                                            formControlName="acceptTerms"
+                                            [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors}">
+                                        Tôi đồng ý với các
+                                        <a class="fw-bold" href="#" title="Điều khoản">
+                                            điều khoản
+                                        </a>
+                                        và
+                                        <a class="fw-bold" href="#" title="chính sách">
+                                            chính sách
+                                        </a>
+                                        của VTC Mobile. </label>
+                                    @if (submitted && f['acceptTerms'].errors) {
+                                    <div class="invalid_message">
+                                        @if (f['acceptTerms'].errors['required']) {
+                                        <div>Yêu cầu đồng ý các điều khoản</div>
+                                        }
+                                    </div>
+                                    }
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="acceptAge"
+                                            formControlName="acceptAge"
+                                            [ngClass]="{ 'is-invalid': submitted && f['acceptAge'].errors}">
+                                        Tôi xác nhận đủ từ 18 tuổi trở lên. </label>
+                                    @if (submitted && f['acceptAge'].errors) {
+                                    <div class="invalid_message">
+                                        @if (f['acceptAge'].errors['required']) {
+                                        <div>Yêu cầu đồng ý xác nhận độ tuổi</div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
 
-                            <div class="col-3 offset-lg-1 py-2 text-end">
-                                <button type="button" class="btn btn-secondary">Hủy</button>
-                            </div>
-                            <div class="col-7 py-2 d-grid">
-                                <button type="button" class="btn btn-primary-xl btn-block">Xác nhận</button>
+                                <div class="col-3 offset-lg-1 py-2 text-end">
+                                    <button type="button" class="btn btn-secondary" (click)="onReset()">Hủy</button>
+                                </div>
+                                <div class="col-7 py-2 d-grid">
+                                    <button type="submit" class="btn btn-primary-xl btn-block">Xác nhận</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
