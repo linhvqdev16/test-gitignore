@@ -22,7 +22,7 @@ import { SpinnerPageComponent } from './views/defaults/spinner/spinner-page/spin
 import { httpInterceptorProviders } from './services/base-services/http-request-interceptor-service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NumberPipe } from './commons/number-pipe';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackbarComponent } from './views/defaults/snackbar/snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -69,7 +69,8 @@ import { DialogErrorComponent } from './views/defaults/dialog-error/dialog-error
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    httpInterceptorProviders
+    httpInterceptorProviders, 
+    {provide: LocationStrategy, useClass: PathLocationStrategy }
   ],
   bootstrap: [AppComponent],
   exports: [

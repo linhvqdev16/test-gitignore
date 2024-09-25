@@ -17,7 +17,6 @@ export class HomePageComponent implements OnInit {
 
    ngOnInit(): void {
     this.communicationService.currentAuthen.subscribe((res) => {
-      this.dialog.closeAll();
       if (res == 1) {
         this.communicationService.setAuthen(0);
         if (this.localStorageService.getToken().length == 0) {

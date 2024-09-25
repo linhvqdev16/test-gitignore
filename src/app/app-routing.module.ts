@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ CommonModule ,RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [ CommonModule ,RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled', useHash: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
