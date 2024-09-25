@@ -8,15 +8,16 @@ import { PersonalPageComponent } from './views/personal-page/personal-page.compo
 import { RegisterGamerPageComponent } from './views/register-gamer-page/register-gamer-page.component';
 import { ReportCommonComponent } from './views/report/report-common/report-common.component';
 import { InfluencerPageComponent } from './views/influencer-page/influencer-page.component';
+import { AuthGuard } from './core/auth/auth-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
     {path: 'home-page', component: HomePageComponent}, 
     {path: 'quest-page', component: QuestPageComponent}, 
     {path: 'game-list-page', component: GameListPageComponent}, 
-    {path: 'personal-page', component: PersonalPageComponent}, 
-    {path: 'register-gamer-page', component: RegisterGamerPageComponent}, 
-    {path: 'report-common', component: ReportCommonComponent},
+    {path: 'personal-page', component: PersonalPageComponent, canActivate: [AuthGuard]}, 
+    {path: 'register-gamer-page', component: RegisterGamerPageComponent, canActivate: [AuthGuard]}, 
+    {path: 'report-common', component: ReportCommonComponent, canActivate: [AuthGuard]},
     {path: 'influencer-page', component: InfluencerPageComponent},
     { path: '**', redirectTo: '' }
 ];

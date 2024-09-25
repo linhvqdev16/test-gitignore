@@ -6,8 +6,9 @@ import { UserService } from "../services/user-service";
 import { LocalStorageSerice } from "../core/local-storage/local-storeage-service";
 import { GetAccessTokenRequest } from "../request/get-access-token-request";
 import { AuthenModel } from "../models/authen-model";
-import { UserModel } from "../models/user-model";
+import { UserModel, UserModelBasic } from "../models/user-model";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   template: ''
@@ -20,7 +21,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   snackBar = inject(MatSnackBar);
 
   isLogin: boolean = false;
-  userModel: UserModel | undefined;
+  userModel: UserModelBasic | undefined;
 
   constructor() {
     this.initConfiguration();
@@ -31,6 +32,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initConfiguration() {
+    this.isSetLoading();
     this.activatedRoute?.queryParams.subscribe((params: Params) => {
       if (params != undefined && params['code'] != undefined) {
         let accessTokenRequest: GetAccessTokenRequest = {
@@ -38,20 +40,20 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
         };
         this.userService?.GetAccessToken(accessTokenRequest).subscribe({
           next: (res) => {
+            console.log(res);
             if (res) {
               console.log(res);
               if (res.status) {
                 var data: AuthenModel = res.data;
                 this.localStorageService?.setToken(data.token ?? '');
                 this.localStorageService?.setUserInfo(data.userInfo);
-                console.log('set is login');
                 this.isLogin = true;
                 this.userModel = data.userInfo;
               }
+              this.unSetLoading();
             }
           },
           error: (error) => {
-            console.log(error);
           }
         });
       }
@@ -96,6 +98,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   onLogout(){
     this.isLogin = false;
     this.localStorageService.clean();
+    window.location.replace(window.location.pathname); 
   }
 
   openSnackBar(message: string, action: string) {
@@ -104,5 +107,4 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
       panelClass: ["style-snackbar"]
     });
   }
-
 }

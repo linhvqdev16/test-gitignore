@@ -13,6 +13,7 @@ import { ServerModel } from '../../models/server-model';
 import { GetServerRequest } from '../../request/get-server-request';
 import { GetInfoServiceRequest } from '../../request/get-info-service-request';
 import { CommunicateService } from '../../services/base-services/communicate-service';
+import { LocalStorageSerice } from '../../core/local-storage/local-storeage-service';
 
 @Component({
   selector: 'app-personal-page',
@@ -21,18 +22,20 @@ import { CommunicateService } from '../../services/base-services/communicate-ser
 })
 export class PersonalPageComponent extends BasePageComponent implements OnInit {
 
+
   constructor(private router: Router,
     private gameService: GameService,
     private cdr: ChangeDetectorRef,
     private influencerService: InfluencerService,
-    userService: UserService,
     private communicateService: CommunicateService) {
     super();
+    if(this.localStorageService.getToken() == undefined){
+      this.userModel = undefined;
+    }
   }
 
   override ngOnInit(): void {
     this.onGetServices();
-    this.onGetInfoInfluencer();
     this.onGetServer();
   }
 
@@ -51,7 +54,6 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   }
 
   onGetServices() {
-
     this.serviceModels = new Array<ServiceModel>();
     var request: BaseRequest = {
       pageIndex: 1,
@@ -65,13 +67,14 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         this.cdr.detectChanges();
       }
     });
   }
 
   onGetInfoInfluencer() {
+    console.log('call get info by scoinId');
     let request: GetInfluencerByScoinIdRequest = {
       serviceId: 0
     };
@@ -85,14 +88,12 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
-
+        // console.log(error);
         this.cdr.detectChanges();
       }
     });
   }
   onGetServer() {
-
     this.serverModels = new Array<ServerModel>();
     let request: GetServerRequest = {
       serviceId: this.serviceSelected?.serviceId ?? 0
@@ -104,13 +105,10 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
             this.serverModels = result.data;
           }
         }
-
-
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.log(error);
-
+        // console.log(error);
         this.cdr.detectChanges();
       }
     });
@@ -135,7 +133,7 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   }
 
   onNavToRegisterPage(): void {
-    this.communicateService.setAction(1); 
+    this.communicateService.setAction(1);
     this.router.navigateByUrl(UrlDefine.RegisterGamerPage);
   }
 

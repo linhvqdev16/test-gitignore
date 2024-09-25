@@ -36,7 +36,7 @@ export class HttpClientService {
     };
     private handleErrorObservable(obj: any) {
         let errObject;
-        console.log(obj.message);
+        // console.log(obj.message);
         return Promise.resolve(errObject);
     }
     postJsonObservable(absolutePath: string, obj: any = {}): Observable<any> {
@@ -58,7 +58,7 @@ export class HttpClientService {
             .pipe(map((response) => {
                 return response;
             }), catchError((error) => {
-                console.log('error: ' + error.message);
+                // console.log('error: ' + error.message);
                 const errorObj = { statusCode: error.status, errorMessage: error.message, dateTime: new Date() }
                 return this.handleErrorObservable(error);
             }));
@@ -75,9 +75,9 @@ export class HttpClientService {
             , { headers: header, params: new HttpParams(httpParams) }
         ).subscribe({
             next: (data: any) => {
-              console.log(data);
+            //   console.log(data);
               return data;
-            }, error: (err) => console.log(err)
+            }, error: (err) => err
           });
     }
     getJsonAuthenObservable(absolutePath: string, obj: any): Observable<any> {
@@ -92,7 +92,7 @@ export class HttpClientService {
             url
             , { headers: header, params: new HttpParams(httpParams) }
         ).pipe(map((response) => {
-            console.log(response);
+            // console.log(response);
             return response;
         }));
     }

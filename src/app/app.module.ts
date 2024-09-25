@@ -28,7 +28,9 @@ import { SnackbarComponent } from './views/defaults/snackbar/snackbar.component'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { InfluencerPageComponent } from './views/influencer-page/influencer-page.component';
 import {MatCardModule} from '@angular/material/card'
-import {MatIconModule} from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon'
+import { DialogComponent } from './views/defaults/dialog/dialog.component';
+import { DialogErrorComponent } from './views/defaults/dialog-error/dialog-error.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import {MatIconModule} from '@angular/material/icon';
     NumberPipe,
     RegisterGamerPageComponent,
     SnackbarComponent,
-    InfluencerPageComponent
+    InfluencerPageComponent,
+    DialogComponent,
+    DialogErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,6 @@ import {MatIconModule} from '@angular/material/icon';
   exports: [
     NgxSpinnerModule
   ],
-  schemas: []
+  schemas: [],
 })
 export class AppModule { }

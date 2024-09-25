@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UrlDefine } from '../../../commons/url-define';
-import { HttpClient, HttpHeaders, HttpParams, HttpParamsOptions } from '@angular/common/http';
-import { catchError, map, Observable, switchMap } from 'rxjs';
 import { CommunicateService } from '../../../services/base-services/communicate-service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogErrorComponent } from '../../defaults/dialog-error/dialog-error.component';
+import { LocalStorageSerice } from '../../../core/local-storage/local-storeage-service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -11,12 +12,19 @@ import { CommunicateService } from '../../../services/base-services/communicate-
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private router: Router, private communicationService: CommunicateService) {
+  constructor(private router: Router, private communicationService: CommunicateService, private dialog: MatDialog, private localStorageService: LocalStorageSerice) {
   }
-  httpClient = inject(HttpClient);
-  public data: Array<any> = [];
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.communicationService.currentAuthen.subscribe((res) => {
+      this.dialog.closeAll();
+      if (res == 1) {
+        this.communicationService.setAuthen(0);
+        if (this.localStorageService.getToken().length == 0) {
+          this.dialog.open(DialogErrorComponent);
+        }
+      }
+    });
   }
 
   onNavRegister(): void {

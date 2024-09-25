@@ -25,3 +25,14 @@ export interface UserModel{
     yahooName?: string, 
     yahooGender?: number
 }
+
+export interface UserModelBasic{
+    userName?: string, 
+    scoinName?: string, 
+    linkDownload?: string, 
+    referenceCode?: string, 
+    slogan?: string, 
+    youtubeChannel?: string, 
+    liveGChannel?: string, 
+    tiktokChannel?: string
+}

@@ -15,7 +15,8 @@ import { Location } from '@angular/common';
 import { CommunicateService } from '../../services/base-services/communicate-service';
 import { Subscription } from 'rxjs';
 import { GetInfluencerByScoinIdRequest } from '../../request/influencer/get-influencer-by-scoin-id-request';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogComponent } from '../defaults/dialog/dialog.component';
 @Component({
   selector: 'app-register-gamer-page',
   templateUrl: './register-gamer-page.component.html',
@@ -31,10 +32,11 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
     private formBuilder: FormBuilder,
     private influnencerService: InfluencerService,
     private location: Location,
-    private communicateService: CommunicateService) {
+    private communicateService: CommunicateService,
+    private dialog: MatDialog) {
     super();
     this.action = this.communicateService.getAction();
-    if(this.action == 1){
+    if (this.action == 1) {
       this.isReadonly = true;
     }
     console.log(this.action);
@@ -134,7 +136,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         this.openSnackBar(error.message, '');
         this.cdr.detectChanges();
       }
@@ -164,7 +166,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
         }
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         this.openSnackBar(error.message, '');
         this.cdr.detectChanges();
       }
@@ -186,7 +188,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
           }
         },
         error: (error) => {
-          console.log(error);
+          // console.log(error);
           this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
@@ -219,7 +221,6 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
     return this.form.controls;
   }
   onSubmit(): void {
-    ;
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -234,23 +235,21 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
       next: (result) => {
         if (result) {
           if (result.status) {
-            debugger;
-            this.openSnackBar(result.message ?? '', '');
             this.submitted = false;
             this.form.reset();
-            this.location.back();
-          }else{
+            const dialogRef = this.dialog.open(DialogComponent);
+          } else {
             this.openSnackBar(result.message ?? '', '');
           }
           this.cdr.detectChanges();
         }
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         this.openSnackBar(error.message ?? '', '');
         this.cdr.detectChanges();
       }
-    })
+    });
   }
   onReset(): void {
     this.submitted = false;

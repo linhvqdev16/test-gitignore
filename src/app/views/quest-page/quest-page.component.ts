@@ -58,7 +58,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error);
+          // console.log(error);
           this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
@@ -88,7 +88,7 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error);
+          // console.log(error);
           this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
@@ -117,9 +117,9 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           }
         },
         error: (error) => {
+            this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
-          this.openSnackBar(error.message, '');
-          console.log(error);
+          // console.log(error);
         }
       }
     );

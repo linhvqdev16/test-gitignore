@@ -67,7 +67,7 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         this.openSnackBar(error.message ?? '', '');
         this.cdr.detectChanges();
       }

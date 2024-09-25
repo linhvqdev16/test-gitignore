@@ -42,9 +42,10 @@ export class HeaderPageComponent extends BasePageComponent implements OnInit {
     let loginUrl: string = "";
     loginUrl = Common.GetAuthorUrl();
     loginUrl = loginUrl.replace('clientValue', Common.GetClienId());
-    let originUrl: string = encodeURI(window.location.href);
+    var url = window.location.href.split("?");
+    let originUrl: string = encodeURI(url[0]);
     loginUrl = loginUrl.replace('redirecUrl', originUrl);
     loginUrl = loginUrl.replace('agencyValue', '0');
     window.open(loginUrl);
   }
-}
+} 

@@ -53,7 +53,7 @@
               "src/js/res-1.js"
             ],
             "server": "src/main.server.ts",
-            "prerender": true
+            "prerender": false
           },
           "configurations": {
             "production": {
