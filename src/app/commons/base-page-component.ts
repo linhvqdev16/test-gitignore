@@ -35,7 +35,6 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initConfiguration() {
     this.isSetLoading();
-    debugger;
     if (this.localStorageService.getDateLogin() && this.localStorageService.getExpireSecond() > 0) {
       var dateLogin = this.localStorageService.getDateLogin() ?? new Date();
       if (((new Date()).getTime() / 1000) > (dateLogin?.getTime() / 1000 + this.localStorageService.getExpireSecond())) {

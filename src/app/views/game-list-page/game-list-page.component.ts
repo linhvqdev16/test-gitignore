@@ -87,6 +87,7 @@ export class GameListPageComponent extends BasePageComponent implements OnInit {
   }
 
   onNavInfluencerPage(item: ServiceModel) {
+    console.log("Click item: " + item.serviceId);
     this.communicateSerivce.setServiceId(item.serviceId ?? 1);
     this.router.navigateByUrl(UrlDefine.InfluencerPage);
   }

@@ -11,7 +11,6 @@ export class CommunicateService {
         1: update influencer
     */
     private action = signal(0);
-    private serviceId = signal(0);
 
     public setAction(data: number) {
         this.action.set(data);
@@ -22,14 +21,18 @@ export class CommunicateService {
         var array = str.split(":");
         return Number(array[1] && array[1].length > 0 ? array[1].trim() : '0');
     }
+
+    private serviceIdSbj = new BehaviorSubject<number>(0); 
+    serviceId = this.serviceIdSbj.asObservable(); 
     public setServiceId(data: number) {
-        this.serviceId.set(data);
+        this.serviceIdSbj.next(data);
     }
-    public getServiceId() {
-        let str = this.serviceId.toString().replaceAll("[", '').replaceAll("]", '');
-        var array = str.split(":");
-        return Number(array[1] && array[1].length > 0 ? array[1].trim() : '0');
-    }
+    // public getServiceId() {
+    //     let str = this.serviceId.toString().replaceAll("[", '').replaceAll("]", '');
+    //     var array = str.split(":");
+    //     return Number(array[1] && array[1].length > 0 ? array[1].trim() : '0');
+    // }
+    
    
     private unAutherization = new BehaviorSubject<number>(0);
     currentAuthen = this.unAutherization.asObservable();
