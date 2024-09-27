@@ -8,7 +8,7 @@ import { GetAccessTokenRequest } from "../request/get-access-token-request";
 import { AuthenModel } from "../models/authen-model";
 import { UserModel, UserModelBasic } from "../models/user-model";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatDialog } from "@angular/material/dialog";
+import { CommunicateService } from "../services/base-services/communicate-service";
 
 @Component({
   template: ''
@@ -19,13 +19,15 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   localStorageService = inject(LocalStorageSerice);
   activatedRoute = inject(ActivatedRoute);
   snackBar = inject(MatSnackBar);
+  communicateService = inject(CommunicateService);
+
 
   isLogin: boolean = false;
   userModel: UserModelBasic | undefined;
 
   constructor() {
     this.initConfiguration();
-    if(this.localStorageService.getToken() && this.localStorageService.getToken().length > 0){
+    if (this.localStorageService.getToken() && this.localStorageService.getToken().length > 0) {
       this.isLogin = true;
       this.userModel = this.localStorageService.getUserInfo();
     }
@@ -33,6 +35,15 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initConfiguration() {
     this.isSetLoading();
+    debugger;
+    if (this.localStorageService.getDateLogin() && this.localStorageService.getExpireSecond() > 0) {
+      var dateLogin = this.localStorageService.getDateLogin() ?? new Date();
+      if (((new Date()).getTime() / 1000) > (dateLogin?.getTime() / 1000 + this.localStorageService.getExpireSecond())) {
+        this.localStorageService.clean();
+        window.location.replace(window.location.pathname);
+      }
+    }
+
     this.activatedRoute?.queryParams.subscribe((params: Params) => {
       if (params != undefined && params['code'] != undefined) {
         let accessTokenRequest: GetAccessTokenRequest = {
@@ -40,15 +51,17 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
         };
         this.userService?.GetAccessToken(accessTokenRequest).subscribe({
           next: (res) => {
-            console.log(res);
             if (res) {
-              console.log(res);
               if (res.status) {
                 var data: AuthenModel = res.data;
                 this.localStorageService?.setToken(data.token ?? '');
                 this.localStorageService?.setUserInfo(data.userInfo);
+                this.localStorageService.setExpireSecond(data.expires_in ?? 0);
+                let date = new Date();
+                this.localStorageService.setDateLogin(date.toISOString());
                 this.isLogin = true;
                 this.userModel = data.userInfo;
+                this.communicateService.setIsLogin(true);
               }
               this.unSetLoading();
             }
@@ -95,10 +108,10 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.spinnerPageComponent.ngShowSpinner(this.isLoading);
     }
   }
-  onLogout(){
+  onLogout() {
     this.isLogin = false;
     this.localStorageService.clean();
-    window.location.replace(window.location.pathname); 
+    window.location.replace(window.location.pathname);
   }
 
   openSnackBar(message: string, action: string) {

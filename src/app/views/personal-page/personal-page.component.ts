@@ -26,8 +26,7 @@ export class PersonalPageComponent extends BasePageComponent implements OnInit {
   constructor(private router: Router,
     private gameService: GameService,
     private cdr: ChangeDetectorRef,
-    private influencerService: InfluencerService,
-    private communicateService: CommunicateService) {
+    private influencerService: InfluencerService) {
     super();
     if(this.localStorageService.getToken() == undefined){
       this.userModel = undefined;

@@ -1,5 +1,4 @@
 // JavaScript Document
-
 $(document).ready(function () {
   var h = $(window).height();
   var w = $(window).width();
@@ -17,7 +16,7 @@ $(document).ready(function () {
     $('body').css({ height: ih, width: iw });
   }
 
-  $(window).on('resize', function () {	  
+  $(window).on('resize', function () {
     var h = $(window).height();
     var w = $(window).width();
     if (w > 992) {
@@ -42,8 +41,4 @@ AOS.init({
     var maxWidth = 1920;
     return window.innerWidth < maxWidth;
   }
-	
 });
-
-
-

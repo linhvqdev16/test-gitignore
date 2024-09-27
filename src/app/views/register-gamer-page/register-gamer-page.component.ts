@@ -27,12 +27,10 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
   subscription: Subscription | undefined;
 
   constructor(private gameService: GameService,
-    userService: UserService,
     private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private influnencerService: InfluencerService,
     private location: Location,
-    private communicateService: CommunicateService,
     private dialog: MatDialog) {
     super();
     this.action = this.communicateService.getAction();

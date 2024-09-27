@@ -13,7 +13,6 @@ export class CommunicateService {
     private action = signal(0);
     private serviceId = signal(0);
 
-
     public setAction(data: number) {
         this.action.set(data);
     }
@@ -31,9 +30,16 @@ export class CommunicateService {
         var array = str.split(":");
         return Number(array[1] && array[1].length > 0 ? array[1].trim() : '0');
     }
+   
     private unAutherization = new BehaviorSubject<number>(0);
     currentAuthen = this.unAutherization.asObservable();
     public setAuthen(value: number) {
         this.unAutherization.next(value);
+    }
+
+    private isLogin = new BehaviorSubject<boolean>(false); 
+    isLogged = this.isLogin.asObservable(); 
+    public setIsLogin(value: boolean){
+        this.isLogin.next(value);
     }
 }

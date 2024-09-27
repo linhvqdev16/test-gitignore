@@ -70,7 +70,7 @@ import { DialogErrorComponent } from './views/defaults/dialog-error/dialog-error
     provideClientHydration(),
     provideAnimationsAsync(),
     httpInterceptorProviders, 
-    {provide: LocationStrategy, useClass: PathLocationStrategy }
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent],
   exports: [

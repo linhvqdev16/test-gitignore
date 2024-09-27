@@ -12,7 +12,6 @@ export class DialogComponent {
   constructor(private dialog: MatDialogRef<DialogComponent>) { };
 
   onLogin(){
-    debugger;
     let loginUrl: string = "";  
     loginUrl = Common.GetAuthorUrl();
     loginUrl = loginUrl.replace('clientValue', Common.GetClienId());

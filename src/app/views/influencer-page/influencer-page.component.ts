@@ -22,7 +22,6 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
   constructor(private service: GameService, 
               private cdr: ChangeDetectorRef,
               private influencerService: InfluencerService, 
-              private communicateService: CommunicateService, 
               private supportService: SupportService) {
     super();
     this.serviceSelectedId = this.communicateService.getServiceId();
@@ -107,7 +106,6 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
     this.influencerService.SubmitSupport(request).subscribe({
       next: (result) => {
         if(result){
-          debugger; 
           this.onGetInfluencer(); 
           if(this.influencerModels && this.influencerModels?.length > 0){
             this.influencerModelSelected = this.influencerModels.filter((item) => item.referenceName == request.code)[0]; 
@@ -130,7 +128,6 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
     this.supportService.UnSupport(request).subscribe({
       next: (result) => {
         if(result){
-          debugger;
           this.onGetInfluencer(); 
           if(this.influencerModels && this.influencerModels?.length > 0){
             this.influencerModelSelected = this.influencerModels.filter((item) => item.referenceName == request.code)[0]; 
