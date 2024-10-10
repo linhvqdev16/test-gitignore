@@ -57,7 +57,10 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
     referenceName: '',
     nickName: '',
     roleName: ''
-  }
+  }; 
+  serviceId?: number = 0; 
+  serverId?: number = 0; 
+  roleId?: number = 0;
 
   form: FormGroup = new FormGroup({
     nickname: new FormControl(),
@@ -97,6 +100,9 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
   createFormBuild(): void {
     this.form = this.formBuilder.group(
       {
+        serviceId: [null, Validators.required], 
+        serverId: [null, Validators.required], 
+        roleId: [null, Validators.required],
         nickname: ['', Validators.required],
         referenceName: [
           '',
@@ -208,9 +214,7 @@ export class RegisterGamerPageComponent extends BasePageComponent implements OnI
     }
   }
   onChangeServiceModel(event: any) {
-    ;
     if (event.target.value) {
-      ;
       this.registerInfluencerRequest.serviceId = event.target.value;
       this.onGetServerModels(event.target.value);
     }

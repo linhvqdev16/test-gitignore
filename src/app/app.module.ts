@@ -31,6 +31,7 @@ import {MatCardModule} from '@angular/material/card'
 import {MatIconModule} from '@angular/material/icon'
 import { DialogComponent } from './views/defaults/dialog/dialog.component';
 import { DialogErrorComponent } from './views/defaults/dialog-error/dialog-error.component';
+import { QuestDetailPageComponent } from './views/quest-detail-page/quest-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DialogErrorComponent } from './views/defaults/dialog-error/dialog-error
     SnackbarComponent,
     InfluencerPageComponent,
     DialogComponent,
-    DialogErrorComponent
+    DialogErrorComponent,
+    QuestDetailPageComponent,
   ],
   imports: [
     BrowserModule,

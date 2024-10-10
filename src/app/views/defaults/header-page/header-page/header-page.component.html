@@ -19,7 +19,7 @@
                             Danh sách game
                         </button>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="userModel != undefined && userModel.role != undefined && userModel.role.role == 1">
                         <button class="nav-link" (click)="ngQuest()">
                             Danh sách nhiệm vụ
                         </button>

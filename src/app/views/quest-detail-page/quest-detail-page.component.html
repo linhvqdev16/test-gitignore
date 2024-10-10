@@ -1,4 +1,4 @@
-<app-spinner-page></app-spinner-page>
+<!-- <app-spinner-page></app-spinner-page> -->
 <div>
     <div class="bg-distribute">
         <div class="distribute-banner" [ngStyle]="{'background-image': 'url(./images/bg-banner-distribute.png)'}">
@@ -52,85 +52,88 @@
     <div class="quest">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end py-5">
-                <h2 class="title">Danh sách nhiệm vụ</h2>
-                <div class="sub-title">
-                    <select class="form-select" (change)="changeSelectService($event)">
-                        <option>Tất cả game</option>
-                        <option *ngFor="let item of serviceGames" [value]="item.serviceId">
-                            {{item.serviceName}}
-                        </option>
-                    </select>
-                </div>
+                <h2 class="title">Nhiệm vụ chi tiết</h2>
             </div>
-            @if(missions != undefined && missions.length > 0){
             <div class="list-quest">
                 <div class="row">
-                    <div *ngFor="let item of missions" class="col-lg-6 mb-3 brightness" data-aos="fade-up"
-                        data-aos-easing="linear" data-aos-duration="500" data-aos-delay="0">
-                        <div class="thumb" (click)="onNavigateDetail(item.id)">
-                            <img src={{item.bannerUrl}} class="img-fluid" alt=""
-                                *ngIf="item.bannerUrl != null && item.bannerUrl.length > 0" />
+                    <div class="col-lg-6 mb-3 brightness" data-aos="fade-up" data-aos-easing="linear"
+                        data-aos-duration="500" data-aos-delay="0">
+                        <div class="thumb">
+                            <img src={{missionModel?.bannerUrl}} class="img-fluid" alt=""
+                                *ngIf="missionModel?.bannerUrl != null" />
                             <img src="images/thumb-ghnt.png" class="img-fluid" alt=""
-                                *ngIf="item.bannerUrl == null || item.bannerUrl.length == 0" />
+                                *ngIf="missionModel?.bannerUrl == null" />
                         </div>
+                    </div>
+                    <div class="col-lg-6 mb-3 brightness" data-aos="fade-up" data-aos-easing="linear"
+                        data-aos-duration="500" data-aos-delay="0">
                         <div class="row">
                             <div class="col-lg-6 mb-3 brightness">
-                                <h2 class="title-game">{{item.name}}</h2>
-                                <p class="date">Ngày hết hạn <strong>{{item.endDate | date: 'dd/MM/yyyy'}}</strong></p>
+                                <h2 class="title-game">{{missionModel?.name}}</h2>
+                                <p class="date">Ngày hết hạn <strong>{{missionModel?.endDate | date:
+                                        'dd/MM/yyyy'}}</strong></p>
                             </div>
                             <div class="col-lg-6 mb-3 brightness" *ngIf="userModel != undefined && userModel.role != undefined && userModel.role.role == 1">
-                                <div class="btn-point" *ngIf="item.userStatus == 0 && item.state == 2">
-                                    <a class="btn" title="" (click)="onRegisterMission(item.id)"> 
+                                <div class="btn-point"
+                                    *ngIf="missionModel?.userStatus == 0 && missionModel?.state == 2">
+                                    <a class="btn" title="">
                                         Đăng ký
                                     </a>
                                 </div>
-                                <div class="btn-point" *ngIf="item.userStatus == 1 && item.state == 2">
+                                <div class="btn-point"
+                                    *ngIf="missionModel?.userStatus == 1 && missionModel?.state == 2">
                                     <a class="btn" style="background-color: orange;" title="">
-                                         Đang làm nhiệm vụ
+                                        Đang làm nhiệm vụ
                                     </a>
                                 </div>
-                                <div class="btn-point" *ngIf="item.state == 3">
+                                <div class="btn-point" *ngIf="missionModel?.state == 3">
                                     <a class="btn" style="background-color: red;" title="">
-                                         Đã hết hạn
+                                        Quá hạn
                                     </a>
                                 </div>
-                                <div class="btn-point" *ngIf="item.state == 1">
+                                <div class="btn-point" *ngIf="missionModel?.state == 1">
                                     <a class="btn" style="background-color: green;" title="">
-                                         Hoàn thành
+                                        Hoàn thành
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="btn-point">
                             <a class="btn" title="">
-                                Tổng điểm thưởng: <strong>{{(item.earnPoint |number)?.toString()?.replaceAll(",", ".")
-                                    }} Point</strong>
+                                Tổng điểm thưởng: <strong>{{(missionModel?.earnPoint
+                                    |number)?.toString()?.replaceAll(",", ".") }} Point</strong>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="pag">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" (click)="onChangePage()">
-                                &lang;
-                            </a>
-                        </li>
-                        <li class="page-item" *ngFor="let item of onGetPagination()">
-                            <a class="page-link active" (click)="onChangePage()">
-                                {{item}}
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" (click)="onChangePage()">
-                                &rang;
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-            }
-            @else {}
         </div>
     </div>
+    
+    <div class="statistical">
+        <div class="card container border-0" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500"
+            data-aos-delay="0">
+            <div class="card-body">
+                <h2 class="title">Danh sách Quest</h2>
+                <div class="row">
+                    <div *ngFor="let index of arrayTable" class="col-lg-6 zoom-50">
+                        <table class="table table-bordered">
+                                <tbody *ngFor="let item of onGetQuestTable(index)">
+                                    <tr>
+                                        <td>{{item.eventName}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td><strong>{{(item.questValue |number)?.toString()?.replaceAll(",", ".") }} Point</strong></td>
+                                        <td>Trạng thái</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-statistical-right">
+            <img src="images/home-bg-leaf.png" class="img-fluid" alt="" />
+        </div>
+    </div>
+
 </div>

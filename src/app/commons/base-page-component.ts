@@ -24,6 +24,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isLogin: boolean = false;
   userModel: UserModelBasic | undefined;
+  currentDate: Date = new Date();
 
   constructor() {
     this.initConfiguration();
@@ -32,6 +33,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.userModel = this.localStorageService.getUserInfo();
     }
   }
+  
 
   initConfiguration() {
     this.isSetLoading();
@@ -79,6 +81,7 @@ export class BasePageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+      this.userModel = this.localStorageService.getUserInfo();
   }
 
   public pageIndex = 1;

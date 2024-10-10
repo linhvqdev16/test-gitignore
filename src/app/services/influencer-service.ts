@@ -6,7 +6,7 @@ import { UrlAPIDefine } from "../commons/url-api-define";
 import { BaseRespone } from "../response/base-response";
 import { GetInfluencerByCodeRequest } from "../request/get-influencer-by-code-request";
 import { RegisterInfluencerRequest } from "../request/influencer/register-influencer-request";
-import { GetInfluencerByServiceIdrRequest } from "../request/influencer/get-influencer-by-game-id";
+import { GetInfluencerByServiceIdRequest } from "../request/influencer/get-influencer-by-game-id";
 import { AddOrChangeSupportRequest } from "../models/add-or-change-support-request";
 
 @Injectable({
@@ -24,7 +24,7 @@ export class InfluencerService {
     Register(request: RegisterInfluencerRequest): Observable<BaseRespone> {
         return this.httpClient.postJsonAuthenObservable(UrlAPIDefine.RegisterInfluencer, request);
     }
-    GetByServiceId(request: GetInfluencerByServiceIdrRequest): Observable<BaseRespone> {
+    GetByServiceId(request: GetInfluencerByServiceIdRequest): Observable<BaseRespone> {
         return this.httpClient.getJsonAuthenObservable(UrlAPIDefine.GetInfluencerByServiceId, request);
     }
     SubmitSupport(request: AddOrChangeSupportRequest) : Observable<BaseRespone>{

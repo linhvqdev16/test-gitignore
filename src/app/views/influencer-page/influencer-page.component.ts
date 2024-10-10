@@ -4,7 +4,7 @@ import { BasePageComponent } from '../../commons/base-page-component';
 import { BaseRequest } from '../../request/base-request';
 import { ServiceModel } from '../../models/service-model';
 import { InfluencerModel } from '../../models/influencer-model';
-import { GetInfluencerByServiceIdrRequest } from '../../request/influencer/get-influencer-by-game-id';
+import { GetInfluencerByServiceIdRequest } from '../../request/influencer/get-influencer-by-game-id';
 import { InfluencerService } from '../../services/influencer-service';
 import { CommunicateService } from '../../services/base-services/communicate-service';
 import { BaseModelResponse } from '../../response/base-response';
@@ -35,17 +35,20 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
   serviceSelectedId: number = 0;
   keySearch: string = "";
   serverSeletedId: number = 0;
-  influencerGetByRequest: GetInfluencerByServiceIdrRequest = {
+  influencerGetByRequest: GetInfluencerByServiceIdRequest = {
     pageIndex: 1,
     pageSize: 10,
     serverId: 0,
-    serviceId: 0
+    serviceId: 0,
+    referenceCode: ""
   }
+  referenceCode: string = "";
 
   override ngOnInit(): void {
     this.onGetServices();
     this.onGetInfluencer();
   }
+
   onGetServices() {
     this.serviceGames = new Array<ServiceModel>();
     let baseRequest: BaseRequest = {
@@ -74,6 +77,7 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
     this.influencerModels = new Array<InfluencerModel>();
     this.influencerGetByRequest.serverId = this.serverSeletedId;
     this.influencerGetByRequest.serviceId = this.serviceSelectedId;
+    this.influencerGetByRequest.referenceCode = this.referenceCode;
     this.influencerService.GetByServiceId(this.influencerGetByRequest).subscribe({
       next: (result) => {
         if (result) {
@@ -147,5 +151,16 @@ export class InfluencerPageComponent extends BasePageComponent implements OnInit
       return 'gainsboro';
     }
     return 'white';
+  }
+  onChangeService(event: any) {
+    if (event.target.value) {
+      this.serviceSelectedId = event.target.value;
+      this.onGetInfluencer();
+    }
+  }
+  onChangeReferenceCode() {
+    if (this.referenceCode || this.referenceCode.length == 0) {
+      this.onGetInfluencer();
+    }
   }
 }

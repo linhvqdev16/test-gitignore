@@ -16,9 +16,9 @@ export class DialogComponent {
     loginUrl = Common.GetAuthorUrl();
     loginUrl = loginUrl.replace('clientValue', Common.GetClienId());
     var url = window.location.href.split("?");
-    let originUrl: string = encodeURI(url[0]).replaceAll(UrlDefine.RegisterGamerPage, UrlDefine.HomePage);
+    let originUrl: string = encodeURI(url[0]).replaceAll(UrlDefine.HomePage, UrlDefine.RegisterGamerPage);
     loginUrl = loginUrl.replace('redirecUrl', originUrl);
     loginUrl = loginUrl.replace('agencyValue', '0');
-    window.open(loginUrl);
+    window.location.replace(loginUrl);
   }
 }

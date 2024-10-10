@@ -34,5 +34,12 @@ export interface UserModelBasic{
     slogan?: string, 
     youtubeChannel?: string, 
     liveGChannel?: string, 
-    tiktokChannel?: string
+    tiktokChannel?: string, 
+    role?: RoleUserEntity
+}
+
+export interface RoleUserEntity{
+    scoinId?: number, 
+    scoinName?: string, 
+    role?: number
 }

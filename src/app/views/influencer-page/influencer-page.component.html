@@ -43,26 +43,26 @@
         </div>
     </div>
 </div>
-<div class="games" *ngIf="influencerModels && influencerModels.length > 0">
+<div class="games">
     <div class="container">
         <div class="d-flex justify-content-between align-items-end py-5">
             <h2 class="title">Influencer</h2>
             <div class="sub-title">
                 <div class="py-2">
                     <input type="text" class="form-control" id="referenceName" placeholder="Nhập mã giới thiệu"
-                        name="referenceName">
+                        name="referenceName" (input)="onChangeReferenceCode()" [(ngModel)]="referenceCode">
                 </div>
             </div>
             <div class="sub-title">
-                <select class="form-select form-bottom">
-                    <option>Tất cả game</option>
+                <select class="form-select form-bottom" (change)="onChangeService($event)">
+                    <option [value]="0">Tất cả game</option>
                     <option *ngFor="let item of serviceGames" [value]="item.serviceId">
                         {{item.serviceName}}
                     </option>
                 </select>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="influencerModels && influencerModels.length > 0">
             <div class="col-lg-7">
                 @for(item of influencerModels; track item ){
                 <mat-card class="mat-card"
@@ -100,7 +100,7 @@
                 }
             </div>
             <div class="col-lg-5">
-                <mat-card class="mat-card">
+                <mat-card class="mat-card" style="background-color: white;">
                     <div class="container">
                         <h4>Tên nhân vật: {{influencerModelSelected?.roleName ?? ""}}</h4>
                         <div class="copy py-2">

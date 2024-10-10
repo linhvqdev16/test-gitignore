@@ -797,6 +797,15 @@ a {
 	bottom: 0;
 	z-index: 41;
 }
+.btn-expire{
+	background-color: red;
+}
+.btn-done{
+	background-color: green;
+}
+.btn-doing{
+	background-color: yellow;
+}
 @media (max-width: 992px) {
 	.quest .form-select {
 		font-size: 28px;

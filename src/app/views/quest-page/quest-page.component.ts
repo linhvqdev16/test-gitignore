@@ -8,9 +8,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { GetListMissionRequest } from '../../request/get-list-mission-request';
 import { GameService } from '../../services/game-service';
 import { BaseRequest } from '../../request/base-request';
-import { QuestService } from '../../services/quest-service';
-import { GetQuestByMissionRequest } from '../../request/get-quest-by-mission-request';
 import { BaseModelResponse } from '../../response/base-response';
+import { Router } from '@angular/router';
+import { UrlDefine } from '../../commons/url-define';
+import { RegisterMissionRequest } from '../../request/register-mission-request';
 
 @Component({
   selector: 'app-quest-page',
@@ -32,14 +33,13 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
 
   constructor(private missionService: MissionService,
     private gameService: GameService,
-    private questService: QuestService,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private route: Router) {
     super();
   }
   override ngOnInit(): void {
     this.onGetServices();
     this.onGetMissions();
-    this.onGetQuests();
   }
   onGetServices() {
     this.serviceGames = new Array<ServiceModel>();
@@ -58,13 +58,13 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           }
         },
         error: (error) => {
-          // console.log(error);
           this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
       }
     )
   }
+
   onGetMissions() {
     if (this.getListMissionRequest == undefined) {
       this.getListMissionRequest = {
@@ -88,45 +88,38 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
           }
         },
         error: (error) => {
-          // console.log(error);
           this.openSnackBar(error.message, '');
           this.cdr.detectChanges();
         }
       }
     )
   }
-  getQuestByMissionRequest: GetQuestByMissionRequest | undefined;
 
-  onGetQuests() {
-    this.quests = new Array<QuestModel>();
-    if (this.getQuestByMissionRequest == undefined) {
-      this.getQuestByMissionRequest = {
-        missionId: 0
-      };
-    }
-    this.questService.GetQuestByMissionId(this.getQuestByMissionRequest).subscribe(
-      {
-        next: (result) => {
-          if (result) {
-            if (result.status) {
-              let data: BaseModelResponse = result.data;
-              this.quests = data.data;
-              this.getNumberTable((data.totalRecord ?? 0) % 3 == 1 ? Math.floor((data.totalRecord ?? 0) / 3) + 1 : (data.totalRecord ?? 0) / 3);
-            }
+  onRegisterMission(missionId: number) {
+    let request: RegisterMissionRequest = {
+      missionId: missionId
+    };
+    this.missionService.RegisterMission(request).subscribe({
+      next: (result) => {
+        if(result){
+          if(result.status){
+            this.openSnackBar(result.message ?? "", '');
+            this.onGetMissions();
             this.cdr.detectChanges();
           }
-        },
-        error: (error) => {
-            this.openSnackBar(error.message, '');
-          this.cdr.detectChanges();
-          // console.log(error);
         }
+      }, 
+      error: (error) => {
+        this.openSnackBar(error.message, '');
+        this.cdr.detectChanges();
       }
-    );
+    })
   }
+
   onGetQuestTable(index: number): any {
     return this.quests?.slice(index * 3, 3 * (index + 1));
   }
+
   onGetPagination(): any {
     let arrayTable: Array<number> | undefined;
     arrayTable = new Array<number>();
@@ -140,16 +133,22 @@ export class QuestPageComponent extends BasePageComponent implements OnInit {
     }
     return arrayTable;
   }
+
   getNumberTable(val: number): void {
     this.arrayTable = new Array<number>();
     for (let i = 0; i < val; i++) {
       this.arrayTable.push(i);
     }
   }
+
   changeSelectService(event: any) {
     this.pageIndex = 1;
     this.serviceIdSelected = event.target.value;
     this.onGetMissions();
   }
   onChangePage() { }
+
+  onNavigateDetail(id: number) {
+    this.route.navigate([UrlDefine.QuestDetailPage, id]);
+  }
 }

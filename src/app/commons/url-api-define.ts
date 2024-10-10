@@ -1,6 +1,8 @@
 export class UrlAPIDefine {
     /// Mission
     public static GetListMission = "/mission/getList";
+    public static GetMissionDetail = "/mission/getDetail";
+    public static AddMission = "/mission/addMisison";
 
     /// Service 
     public static GetListService = '/api/Services/list';

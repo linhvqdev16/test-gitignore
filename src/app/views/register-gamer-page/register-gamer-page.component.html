@@ -18,44 +18,58 @@
                                     <h4>Tên game <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
                                 <div class="col-lg-7 py-2">
-                                    <select class="form-select"
-                                        (change)="onChangeServiceModel($event)"
+                                    <select class="form-select" (change)="onChangeServiceModel($event)"
                                         [(ngModel)]="registerInfluencerRequest.serviceId"
-                                        [ngModelOptions]="{standalone: true}"
-                                        [value]="0"
-                                        >
+                                        [ngModelOptions]="{standalone: true}" [value]="0"
+                                        [ngClass]="{ 'is-invalid': submitted && registerInfluencerRequest.serviceId == 0}">
                                         <option [value]="0">Chọn Game</option>
                                         @for(item of serviceModels; track item){
                                         <option value="{{item.serviceId}}">{{item.serviceName}}</option>
                                         }
                                     </select>
                                 </div>
+                                @if (submitted && registerInfluencerRequest.serviceId == 0) {
+                                <div class="invalid_message">
+                                    <div class="position_message">Bắt buộc chọn game</div>
+                                </div>
+                                }
                                 <div class="col-lg-3 offset-lg-1 py-2">
                                     <h4>Server <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
                                 <div class="col-lg-7 py-2">
-                                    <select class="form-select"
-                                        (change)="onChangeServerModel($event)"
+                                    <select class="form-select" (change)="onChangeServerModel($event)"
                                         [(ngModel)]="registerInfluencerRequest.serverId"
                                         [ngModelOptions]="{standalone: true}"
-                                        >
+                                        [ngClass]="{ 'is-invalid': submitted && registerInfluencerRequest.serverId == 0}">
                                         <option [value]="0">Chọn Server</option>
                                         @for(item of serverModels; track item){
                                         <option value="{{item.serverId}}">{{item.serverName}}</option>
                                         }
                                     </select>
                                 </div>
+                                @if (submitted && registerInfluencerRequest.serverId == 0) {
+                                <div class="invalid_message">
+                                    <div class="position_message">Bắt buộc chọn server</div>
+                                </div>
+                                }
                                 <div class="col-lg-3 offset-lg-1 py-2">
                                     <h4>Nhân vật <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
                                 <div class="col-lg-7 py-2">
-                                    <select class="form-select" [(ngModel)]="registerInfluencerRequest.roleId" [ngModelOptions]="{standalone: true}">
+                                    <select class="form-select" [(ngModel)]="registerInfluencerRequest.roleId"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [ngClass]="{ 'is-invalid': submitted && registerInfluencerRequest.roleId == 0}">
                                         <option [value]="0">Chọn Nhân Vật</option>
                                         @for(item of this.roleModels; track item){
                                         <option value="{{item.roleId}}">{{item.roleName}}</option>
                                         }
                                     </select>
                                 </div>
+                                @if (submitted && registerInfluencerRequest.roleId == 0) {
+                                <div class="invalid_message">
+                                    <div class="position_message">Bắt buộc chọn nhân vật</div>
+                                </div>
+                                }
                                 <div class="col-lg-3 offset-lg-1 py-2">
                                     <h4>Biệt danh <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
@@ -68,7 +82,7 @@
                                 @if (submitted && f['nickname'].errors) {
                                 <div class="invalid_message">
                                     @if (f['nickname'].errors['required']) {
-                                    <div>Bắt buộc nhập biệt danh</div>
+                                    <div class="position_message">Bắt buộc nhập biệt danh</div>
                                     }
                                 </div>
                                 }
@@ -81,25 +95,23 @@
                                         formControlName="referenceName"
                                         [ngClass]="{ 'is-invalid': submitted && f['referenceName'].errors}"
                                         (input)="onGetInfluencerByCode($event)"
-                                        [(ngModel)]="registerInfluencerRequest.referenceName"
-                                        [readonly]="isReadonly"
-                                        >
+                                        [(ngModel)]="registerInfluencerRequest.referenceName" [readonly]="isReadonly">
                                 </div>
                                 @if (submitted && f['referenceName'].errors) {
                                 <div class="invalid_message">
                                     @if (f['referenceName'].errors['required']) {
-                                    <div>Bắt buộc nhập mã giới thiệu</div>
+                                    <div class="position_message">Bắt buộc nhập mã giới thiệu</div>
                                     }
                                     @if (f['referenceName'].errors['pattern']) {
-                                        <div>Bắt buộc nhập đúng định dạng mã giới thiệu</div>
-                                        }
+                                    <div class="position_message">Bắt buộc nhập đúng định dạng mã giới thiệu</div>
+                                    }
                                 </div>
                                 }
                                 @if (isExisInfluencerCode) {
-                                    <div class="invalid_message">
-                                       Mã giới thiệu đã tồn tại
-                                    </div>
-                                    }
+                                <div class="invalid_message">
+                                    <div class="position_message">Mã giới thiệu đã tồn tại</div>
+                                </div>
+                                }
                                 <div class="col-lg-3 offset-lg-1 py-2">
                                     <h4>Lời giới thiệu <a style="color: red; font-weight: normal;">*</a></h4>
                                 </div>
@@ -112,10 +124,10 @@
                                 @if (submitted && f['slogan'].errors) {
                                 <div class="invalid_message">
                                     @if (f['slogan'].errors['required']) {
-                                    <div>Bắt buộc nhập lời giới thiệu</div>
+                                    <div class="position_message">Bắt buộc nhập lời giới thiệu</div>
                                     }
-                                    @if (f['slogan'].errors['maxLength']) {
-                                    <div>Lời giới thiệu không được quá 60 kí tự</div>
+                                    @else if (f['slogan'].errors['maxLength']) {
+                                    <div class="position_message">Lời giới thiệu không được quá 60 kí tự</div>
                                     }
                                 </div>
                                 }
@@ -124,7 +136,7 @@
                                 </div>
                                 <div class="col-lg-7 py-3 text-start">
                                     <a class="text-decoration-none" href="#">
-                                        <img src="images/icon-liveg.png" alt=""             
+                                        <img src="images/icon-liveg.png" alt=""
                                             class="img-fluid img-fluid-custom zoom-50" />
                                     </a>
                                     <a class="text-decoration-none" href="#">

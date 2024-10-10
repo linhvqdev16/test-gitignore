@@ -13,5 +13,6 @@ export interface MissionModel{
     startDate?: Date, 
     endDate?: Date, 
     status?: number, 
-    userStatus?: number
+    userStatus?: number,
+    state?: number
 }
